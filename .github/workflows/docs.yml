@@ -18,8 +18,24 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm build-storybook
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: storybook
           path: apps/docs/storybook-static
-      # TODO: deploy apps/docs/storybook-static to the internal host (Vercel with SSO, or S3 + CloudFront behind auth).
+
+  # Publishes Storybook to private GitHub Pages (people with access to halth-ui only). PRs build it but never deploy.
+  deploy:
+    needs: storybook
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
