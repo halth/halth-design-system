@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# HaltH UI
+
+The shared component library used across HaltH products. See **Guidelines** for the design concepts and rules (when to use what), and **Design System** for every colour, type style and component on one page.
+
+- **`@halth/ui`:** React components built on HeroUI v3 (Button, Card, …)
+- **`@halth/tokens`:** Colours, radius, fonts, Tailwind v4 / HeroUI v3 themes and Tailwind v3 / NativeWind presets
+
+## Install
+
+```bash
+# .npmrc
+@halth:registry=https://npm.pkg.github.com
+
+npm install @halth/ui @halth/tokens
+```
+
+## Tailwind v4 + HeroUI v3
+
+```css
+/* globals.css */
+@import 'tailwindcss';
+@import '@heroui/styles';
+@import '@halth/tokens/heroui.css';
+@source '../node_modules/@halth/ui/dist';
+```
+
+## Usage
+
+```tsx
+import { Button } from '@halth/ui/button';
+
+<Button variant="outline" onPress={save}>Save</Button>
+```

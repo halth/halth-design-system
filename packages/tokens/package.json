@@ -1,0 +1,54 @@
+{
+  "name": "@halth/tokens",
+  "version": "0.0.0",
+  "description": "HaltH design tokens: colours, radius, fonts, Tailwind v4 theme, HeroUI v3 theme and Tailwind v3/NativeWind presets",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./tailwind-preset": {
+      "types": "./dist/tailwind-preset.d.ts",
+      "import": "./dist/tailwind-preset.js",
+      "require": "./dist/tailwind-preset.cjs"
+    },
+    "./nativewind-preset": {
+      "types": "./dist/nativewind-preset.d.ts",
+      "import": "./dist/nativewind-preset.js",
+      "require": "./dist/nativewind-preset.cjs"
+    },
+    "./theme.css": "./dist/theme.css",
+    "./variables.css": "./dist/variables.css",
+    "./heroui.css": "./dist/heroui.css"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/halth/halth-ui.git",
+    "directory": "packages/tokens"
+  },
+  "scripts": {
+    "build": "tsup && tsx scripts/build-css.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "@types/node": "^24.0.0"
+  }
+}

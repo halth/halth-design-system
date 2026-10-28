@@ -1,0 +1,360 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as AlertStories from '../../../packages/ui/src/components/alert/Alert.stories';
+import * as BookingCardStories from '../../../packages/ui/src/components/booking-card/BookingCard.stories';
+import * as ButtonStories from '../../../packages/ui/src/components/button/Button.stories';
+import * as CardStories from '../../../packages/ui/src/components/card/Card.stories';
+import * as ChipStories from '../../../packages/ui/src/components/chip/Chip.stories';
+import * as EmptyStateStories from '../../../packages/ui/src/components/empty-state/EmptyState.stories';
+import * as InputStories from '../../../packages/ui/src/components/input/Input.stories';
+import { RadiusScale } from './Foundations';
+
+<Meta title="Guidelines" />
+
+# Design guidelines
+
+What HaltH UI uses, where to use it and why. Everything on this page is built into the tokens and components. **Design System** shows them all.
+
+## Design language
+
+### Corner radius
+
+<RadiusScale />
+
+Radii are tokens in `@halth/tokens` (`radii`), named by role so changing one changes every component that uses it:
+
+- **`rounded-pill`:** buttons, chips, tabs and skeleton bars. Things you press or scan are pills, so they look different from content.
+- **`rounded-container` (16px):** cards, modals, fields, dropdowns and attribute chips. It gives containers a soft edge without looking like a button. HeroUI fields get it from `--field-radius`, which uses the same token.
+- **`rounded-tile` (12px):** avatars, which are always rounded squares, never circles. A tile that size looks too round at 16px.
+- **`rounded-full`:** circles (the live dot and the verified badge). A circle is geometry, not a design choice, so it has no token.
+- **Square bottom corners:** the modal on mobile (`rounded-b-none`, then `sm:rounded-b-container`), because it sits on the bottom edge of the screen as a sheet.
+
+### Borders
+
+All borders are 1px.
+
+- **`border-border`:** dividers between card regions, `outline` cards, neutral chips, attribute chips and dropdowns. It separates things without adding weight.
+- **`border-primary`:** outline buttons, so they read as an action.
+- **`border-destructive`:** invalid fields (`Dropdown isInvalid`), to show something needs fixing.
+- **`ring-2 ring-card`:** the verified badge on an avatar. It cuts the badge out from the photo behind it.
+
+Cards on the page have no border. They stand out because they are white on `stone-100`. The only bordered card is `outline`, for white cards on a white surface.
+
+### Elevation
+
+- **No shadows.** `Modal` and the `Tabs` indicator turn off HeroUI's shadows (`shadow-none`), and `@halth/tokens` sets HeroUI's `--field-shadow` to transparent so fields, checkboxes and switches are flat. Layers are shown by colour instead, which keeps screens flat and calm.
+- **Blurred backdrop** behind modals by default, so the task in front stands out. Use `backdrop="opaque"` where blur is too heavy, e.g. in embeds.
+
+### Icons
+
+`@halth/ui/icons` re-exports Lucide (`lucide-react`) under HaltH names: a 24px grid, a 2px round stroke and `currentColor`, so icons always match their text. There is one icon per job, so don't import Lucide directly. The full set is in **Components → Icons**.
+
+- **Status and feedback:** `CheckIcon` (paid, verified), `CircleCheckIcon`, `CircleXIcon`, `AlertCircleIcon` (errors), `AlertTriangleIcon` (warnings), `InfoIcon`, `HelpCircleIcon`, `ClockIcon` (awaiting payment), `BanIcon`, `BadgeCheckIcon`, `ShieldCheckIcon`, `ShieldIcon`, `LockIcon`.
+- **Actions:** `PlusIcon` (add), `MinusIcon`, `XIcon` (remove or dismiss), `PencilIcon` (edit), `Trash2Icon` (delete), `DeleteIcon` (backspace), `CopyIcon`, `ShareIcon`, `PaperPlaneIcon` (invite and send), `DownloadIcon`, `UploadIcon`, `PrinterIcon`, `SearchIcon`, `RotateCcwIcon`, `RepeatIcon`, `PauseIcon`, `EllipsisVerticalIcon` (more options), `GripVerticalIcon` (drag), `MenuIcon`.
+- **Navigation:** `ChevronLeftIcon`, `ChevronRightIcon` (opens something), `ChevronDownIcon`, `ChevronUpDownIcon`, `ArrowLeftIcon`, `ArrowLeftRightIcon`, `ExternalLinkIcon`, `LinkIcon`.
+- **People and places:** `UserIcon` (a person without a photo), `UsersIcon`, `UserXIcon`, `Building2Icon`, `HospitalIcon`, `StethoscopeIcon`, `HeartPulseIcon`, `HardHatIcon`, `AwardIcon`, `MapPinIcon`, `MapPinOffIcon`, `GlobeIcon`.
+- **Payments:** `CreditCardIcon` (payment card, and the card logo fallback), `BanknoteIcon`, `BanknoteArrowUpIcon` (funding available), `WalletIcon`, `NfcIcon` (tap to pay), `QrCodeIcon`, `PercentIcon`, `TagIcon`, `TicketIcon`.
+- **Communication:** `MailIcon`, `PhoneIcon`, `SmartphoneIcon`, `MessageSquareIcon`, `BellIcon`, `MegaphoneIcon`.
+- **Content and settings:** `CalendarIcon` (bookings), `FileTextIcon`, `ClipboardListIcon`, `ImageIcon`, `VideoIcon`, `CameraIcon`, `SettingsIcon`, `KeyRoundIcon`, `PlugIcon`, `PuzzleIcon`, `ZapIcon`, `SparklesIcon`.
+
+Brand logos (Apple, Google Play, Google) aren't icons and aren't in the set.
+
+Icon sizes are tokens (`iconSizes`), used as `size-(--icon-*)`:
+
+- **`--icon-xs` (12px):** the avatar verified badge.
+- **`--icon-sm` (14px):** chips and attribute chips.
+- **`--icon-md` (16px):** next to text, the dropdown chevron, the card logo fallback, icons inside an `Input` and the small `Spinner`.
+- **`--icon-lg` (20px):** the modal close button and the `Alert` icon.
+- **`--icon-xl` (24px):** buttons, the card chevron, the `Spinner` and `EmptyState` icons.
+- **`--icon-2xl` (32px):** the large `Spinner`, and `EmptyState` icons from `sm` up.
+
+Icons are `aria-hidden`; the control around them carries the label.
+
+### Sizing
+
+Control heights, so things in a row line up:
+
+- **24px:** `Chip sm`
+- **28px:** `Button xs`, `Chip md`, `AttributeChip`
+- **36px:** `Button sm`, modal close button
+- **40px:** `Button md`
+- **44px:** `Button lg`
+
+Avatars come in 32, 40, 56, 64 and 88px (`xs`–`xl`).
+
+### Motion
+
+Durations and easings are tokens: CSS variables for Tailwind (`duration-(--duration-fast)`, `ease-standard`) and JS values for Motion/framer-motion (`transitions.base` from `@halth/tokens`).
+
+- **`--duration-fast` (150ms) and `--duration-slow` (500ms):** list cards. The hover colour comes in fast and fades out slowly, so it doesn't flicker as the pointer moves down a list.
+- **`transitions.base` (250ms, `easings.standard`):** the dropdown chevron rotating open. Use it for anything that opens, closes or rotates.
+- **Live dot:** a ping on `BookingCard` marks an appointment that is happening now.
+- **Skeleton:** `animate-pulse` while content loads.
+
+## Colour
+
+### Surfaces
+
+- **White (`bg-card`, `bg-background`):** cards, modals and fields.
+- **`bg-stone-100`:** the page behind cards. The stories use it so white cards stand out.
+- **`bg-secondary`:** secondary buttons, the muted tab track, disabled buttons and skeletons. It is a quiet grey for things that sit back.
+- **`bg-primary`:** primary buttons, the selected tab and the verified badge. This is the brand green, so it marks the main action and identity.
+
+### Text
+
+Set text colour with the `Typography` `tone` prop:
+
+- **`default`:** body text and form values.
+- **`brand`:** names, times and details on cards, and modal titles. It ties key information to the brand.
+- **`mutedGray`:** placeholders and secondary text on white.
+- **`secondaryBrand` (charcoal):** secondary text on grey. Muted grey is too faint there (4.3:1), so unselected tabs on the muted track use charcoal.
+- **`success` / `danger` / `warning`:** status messages. `warning` uses `sun-600`, the same amber as the warning `Chip`.
+- **`white`:** text on `bg-primary`.
+
+### Status
+
+`Chip` tones and the colours behind them:
+
+- **`success`:** Paid.
+- **`warning`:** Awaiting payment, Cancelled, Late cancellation. Needs attention but nothing is broken.
+- **`danger`:** Did not arrive.
+- **`brand`:** neutral emphasis.
+- **`neutral`:** everything else.
+
+`bg-highlight` (light green) is used only for the live dot.
+
+### Hover and press
+
+Interactive things tint toward the brand green, so feedback looks the same everywhere:
+
+- **List cards:** `primary-75` on hover and keyboard focus, and `primary-50` on press, as on the business calendar. Pressable `Card`s and `BookingCard` share these.
+- **Secondary and light buttons:** `primary-50` on hover and `primary-200` on press.
+- **Primary button:** `primary-400` on hover and `primary-500` on press.
+- **Outline and ghost buttons:** `secondary` grey on hover.
+- **Buttons don't animate on press:** no ripple and no shrink. Only the colour changes.
+
+## Typography
+
+**Helvetica Neue** is the only font, set by `--font-sans` in `@halth/tokens`. Each app loads the font files itself (see `platform-business-web` `layout.tsx`). Where an app doesn't define `--font-helvetica-neue`, the token falls back to `"Helvetica Neue"`. Storybook uses the same stack for its own UI and docs pages (`.storybook/theme.ts`), and `src/styles.css` applies it to inline code, colour swatch labels and props tables. Only multi-line code samples stay monospace.
+
+The type scale lives in `@halth/tokens` (`typeScale`) and becomes Tailwind classes, `text-h1` to `text-caption` (`bodySmall` is `text-body-small`). Each class sets size, line height, letter spacing and default weight, so a style is the same everywhere it's used.
+
+Use `Typography` for all text. Inside components, where the text sits in another element (a HeroUI button, chip or tab), use `typographyVariants()`. Every `@halth/ui` component builds its text this way, so changing the scale in tokens changes the whole library.
+
+- **`h1`–`h4`:** page, section, card and group titles.
+- **`subtitle`:** a client's name on `BookingCard`.
+- **`body`:** default text and modal body.
+- **`bodySmall`:** card details: time, appointment, provider and location.
+- **`caption`:** small metadata.
+
+Where components use the scale:
+
+- **`Button`:** `bodySmall` regular, `caption` for `xs`.
+- **`Chip`:** `caption` semibold.
+- **`Tabs`:** `caption` medium on mobile, `bodySmall` from `sm` up.
+- **`Modal`:** title `h4` regular in brand green, body `body`.
+- **`CardTitle`:** `h4` medium. **`CardDescription`:** `bodySmall`.
+- **`Dropdown`:** value and placeholder in `body`.
+- **`Avatar` initials:** `caption` (`xs`) up to `h3` (`xl`).
+
+Weights: `regular` by default, `medium` for names, tabs and emphasis, and `semibold` for `h3`/`h4` and chip labels. Choose the element for meaning and the variant for looks, e.g. `<Typography as="h3" variant="subtitle">`.
+
+## Spacing
+
+- **`p-4` on mobile, `p-5` from `sm` up:** padding inside section cards and `BookingCard`. It gives more room on bigger screens. Modal sections use `p-4`.
+- **`gap-1`–`gap-2`:** between related items, such as an icon and its label or a row of chips.
+- **`gap-4`:** between groups, such as an avatar and the name block.
+- **The `sm` breakpoint (640px):** where `BookingCard` goes from stacked to side by side, tabs stop stretching full width and the modal changes from a bottom sheet to centred.
+
+## States
+
+- **Disabled:** `bg-secondary` with `text-muted-foreground` and no opacity, so the label stays readable.
+- **Loading:** `Button isPending` shows a spinner and keeps its width. A page or section that's loading shows a `Spinner`. Lists use `Skeleton`s in the same layout as the content, like `BookingCardSkeleton`, so the page doesn't jump when data arrives.
+- **Invalid:** a red border on the field, and the `errorMessage` in red under it in place of the description.
+- **Focus:** a visible ring, from HeroUI or `focus-visible:ring-2 ring-ring`. A pressable card also takes its hover tint, so keyboard users see the same highlight as mouse users.
+
+## Components
+
+### Button
+
+<Canvas of={ButtonStories.AllVariants} />
+
+- **`default`:** the main action on a screen or in a modal. Use one, so it's clear what to do next.
+- **`secondary`:** the alternative to the main action, such as Back.
+- **`outline`:** supporting actions, such as Edit details.
+- **`ghost`:** low-emphasis actions, such as More options.
+- **`light`:** low-emphasis actions that should stay brand green, such as Add note.
+- **`danger`:** destructive actions, such as Cancel booking.
+- **`link`:** inline navigation. For anything that changes the URL, put `buttonVariants()` on a real link.
+
+Sizes: `md` by default, `lg` for the main action on mobile, `sm` in dense rows, and `xs` inside compact rows like attribute chips.
+
+### Chip
+
+<Canvas of={ChipStories.AllTones} />
+
+Chips show status and are not pressable. Each one has a label, and an icon only when the icon adds meaning: a check on Paid, a clock on Awaiting payment.
+
+### AttributeChip
+
+A fixed-size pill for a logo or icon, with a tooltip that names it. Use it for wallet and funding details on a card: payment card, health fund, Medicare, funding available and add card. Pass `onPress` to make it a button.
+
+### CardLogo
+
+The logo inside an `AttributeChip`. By default it loads from the HaltH CDN (`CARD_LOGO_BASE_URL`, `https://static.halth.com/assets/logo`) as `<baseUrl>/<folder>/<brand>.png`, so pass the API values straight through: `paymentMethod.brand` or `healthFundCard.healthFundId`. A new brand only needs its PNG uploaded to the CDN, named exactly as the API sends it.
+
+- **`baseUrl`:** load the same logos from another host.
+- **`src`:** show any image URL instead, such as a custom logo or a photo. `type` still sets the size.
+
+If the image fails to load, or there is no brand or `src`, it shows `CreditCardIcon`.
+
+### Card
+
+<Canvas of={CardStories.AllVariants} />
+
+`Card` is deliberately small: two layouts (sections and rows) on two surfaces. Screens fill in its parts and don't style it. More parts (cover images, empty states, amounts) come back only when a real screen needs them.
+
+**Surface.** A card holds one thing, such as a client or a setting. If a screen shows several things, use a list of cards with `gap-2`.
+
+<Canvas of={CardStories.CheckoutPayers} />
+
+- **`white`** (default): on the `stone-100` page.
+- **`outline`**: on a white surface such as a modal or panel. It stays white with a 1px `border-border` edge, so the hover tint shows the same as on the page.
+
+Don't put a plain white card on white, or an outline card on the stone page.
+
+**Padding.** `Card` adds its own padding: `p-3` on mobile and `p-4` from `sm` up for row cards, so the avatar fills most of the card, and `p-4` / `p-5` for section cards. Use `className` for size and placement only (`w-full`, `max-w-md`, `col-span-2`). Don't use it to change padding, radius, background, border or shadow.
+
+#### Sections
+
+<Canvas of={CardStories.WithHeaderAction} />
+
+Settings and profile panels are section cards. Their parts add no padding of their own and always come in this order:
+
+1. **`CardHeader`:** `CardTitle`, then an optional `CardDescription`. One optional action goes in its `endContent`, top right: an icon-only `ghost` menu button (`EllipsisVerticalIcon`) or a `sm` button.
+2. Whatever the panel holds, such as form fields or a list of `outline` cards, as direct children.
+3. **`CardFooter`:** the actions, on the right with the main action last (`Cancel`, then `Save`). Use one `default` button at most, or one `danger` button for a destructive action such as "Delete account".
+
+Every section card uses `CardTitle` for its title. Don't use `Typography` headings or your own sizes and weights in a card. The card puts `gap-4` between parts.
+
+#### Rows
+
+<Canvas of={CardStories.Row} />
+
+List items and people are rows. Build them with `CardRow`, which has four slots in a fixed order:
+
+1. **`startContent`** (optional): an `Avatar`. The row sizes it to 64px on mobile and 88px from `sm` up, the same as the business calendar.
+2. **`title`**: one line, brand green, cut off with an ellipsis if it's too long.
+3. **`details`** (optional): one or two short muted lines, such as a date or a role.
+4. **`endContent`**: one `Button` (Checkout, Book again, or an icon-only `ghost` remove button with an `aria-label`), or nothing on a pressable card, which shows a chevron.
+
+Don't add a second end item or put an image on the right.
+
+**Pressable.** Pass `onPress` and `pressLabel` to make the whole card open or select something. Buttons inside it keep working on their own.
+
+<Canvas of={CardStories.States} />
+
+Pressable cards use the business calendar's states, on `white` and `outline` alike:
+
+- **Hover:** `primary-75`, in over 150ms and out over 500ms.
+- **Keyboard focus:** the same `primary-75` plus a 2px inset `ring-ring`, the same ring buttons get.
+- **Pressed:** `primary-50`.
+
+Read-only cards have no hover or focus state.
+
+#### When a card becomes its own component
+
+If a card needs more than a section or a row, such as several regions, a status that the component maps to a `Chip`, or rows of attribute chips, it becomes its own component named after its job, like `BookingCard`. It reuses `Card`'s surface and pressable states inside `@halth/ui`, takes display props (never API types) and lives in its own folder with stories and tests. Apps don't build their own complex cards out of `Card` and `className`.
+
+### BookingCard
+
+<Canvas of={BookingCardStories.List} />
+
+A booking in the calendar, with its own two-column layout and the same pressable states as `Card`. It takes display props, so the app maps its `Booking` data first. Its whole surface is a stretched `<button>` placed beside the inner buttons rather than around them, so the inner buttons keep working without nesting.
+
+### Modal
+
+For focused tasks and confirmations. On mobile it is a bottom sheet so it's easy to reach with a thumb. From `sm` up it is centred. Footer actions sit on the right.
+
+### Tabs
+
+A pill segmented control for switching between views of the same content.
+
+- **`white` track:** on the `stone-100` page.
+- **`muted` track:** on white surfaces.
+
+On mobile the tabs stretch to full width; from `sm` up each tab is 192px wide (`w-48`). With `fullWidth` the track fills its container and the tabs share it equally at every size.
+
+### Avatar
+
+People's photos, with initials as the fallback. Always a rounded square (`rounded-tile`), never a circle, so people and organisations look the same everywhere. Use `fallback` for an icon, e.g. for organisations.
+
+### Dropdown
+
+The trigger for a select-style field, with a chevron that rotates when open. Needs `framer-motion`.
+
+### Alert
+
+<Canvas of={AlertStories.AllVariants} />
+
+A notice inside a page or form, not a toast. It has a title, an optional sentence and at most one `sm` `Button`. Tones follow `Chip`:
+
+- **`info`** (default): something to know, such as when claims are sent.
+- **`success`:** a setup step is done, such as payments set up.
+- **`warning`:** needs attention but nothing is broken, such as a locked claim. Text is `sun-800`, because `sun-600` fails contrast.
+- **`danger`:** something failed, such as a declined card.
+
+### Badge
+
+A count on the top-right corner of an `Avatar` or `Button`, such as unread notifications. It's hidden at 0, shows "99+" above 99, and needs a `label` for screen readers ("3 unread notifications"). Statuses are `Chip`s, not badges.
+
+### Checkbox and Switch
+
+- **`Checkbox`:** a choice saved with a form, such as accepting terms or sending reminders. The label and the box both toggle it. Add `description` for help text and `errorMessage` with `isInvalid`.
+- **`Switch`:** a setting that takes effect straight away, such as turning online bookings on.
+
+### CopyButton
+
+A `Button` that copies `value`, such as a booking link or reference, and shows a check and "Copied" for two seconds. Name it after what it copies ("Copy link"). It's `secondary` and `sm` by default. Pass `onError` to tell people when the browser blocks the clipboard.
+
+### EmptyState
+
+<Canvas of={EmptyStateStories.AllVariants} />
+
+The only empty state, in every app, whenever a page, section or list has nothing to show: "Payments not set up", "No upcoming appointments". It's centred, with:
+
+- an icon in a brand-green `rounded-tile` tile
+- a title in brand green
+- one sentence saying why it's empty
+- at most one `Button` that fixes it
+
+Use it as the only content of a white `Card`. Inside a table or list, such as a search with no results, use `isCompact`.
+
+### Input
+
+<Canvas of={InputStories.AllVariants} />
+
+Every text field: a label above, the field, then help text or an error. Fields are 40px high (the same as a `md` `Button`) with `body` text so phones don't zoom in, and `rounded-container` corners like `Dropdown`.
+
+- **`type`:** `text`, `email`, `tel`, `password` or `url`, so phones show the right keyboard.
+- **`type="search"`:** the search field, with a search icon and a clear button. There is no separate search bar.
+- **`startContent`:** an icon or prefix, such as `MailIcon` or "$".
+- No visible label? Pass `aria-label`.
+
+### Skeleton and Spinner
+
+- **`Skeleton`:** a grey placeholder. Build a loading list from `bar`s and `tile`s in the same layout as the content.
+- **`Spinner`:** a page or section that's loading, in brand green with a `label` such as "Loading bookings". Buttons use `isPending` instead.
+
+### Tooltip
+
+A short label on hover and keyboard focus, such as naming an icon-only button. Wrap content that isn't a button in `TooltipTrigger` so keyboard users can reach it. Never put anything people need to press inside a tooltip.
+
+## Accessibility
+
+- Text meets 4.5:1 contrast, except the warning `Chip` (`sun-600`). That's why charcoal is used on grey, and why `Alert` warning text is `sun-800`.
+- Controls meet 3:1 against white: the empty `Checkbox` box and the off `Switch` track use the muted grey, not HeroUI's light field border.
+- Status never relies on colour alone: chips have labels, and the live dot has "Live now" screen-reader text.
+- Icon-only controls have an `aria-label`, as on `AttributeChip`.
+- Interactive elements are never nested. The pressable `BookingCard` uses a stretched button beside its inner buttons.
+- Every story runs the a11y addon.

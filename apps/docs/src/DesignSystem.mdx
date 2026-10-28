@@ -1,0 +1,132 @@
+import { Canvas, ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks';
+import { palette } from '@halth/tokens';
+
+import * as AttributeChipStories from '../../../packages/ui/src/components/attribute-chip/AttributeChip.stories';
+import * as AvatarStories from '../../../packages/ui/src/components/avatar/Avatar.stories';
+import * as BookingCardStories from '../../../packages/ui/src/components/booking-card/BookingCard.stories';
+import * as ButtonStories from '../../../packages/ui/src/components/button/Button.stories';
+import * as CardStories from '../../../packages/ui/src/components/card/Card.stories';
+import * as ChipStories from '../../../packages/ui/src/components/chip/Chip.stories';
+import * as DropdownStories from '../../../packages/ui/src/components/dropdown/Dropdown.stories';
+import * as IconsStories from '../../../packages/ui/src/components/icons/Icons.stories';
+import * as ModalStories from '../../../packages/ui/src/components/modal/Modal.stories';
+import * as TabsStories from '../../../packages/ui/src/components/tabs/Tabs.stories';
+import * as TypographyStories from '../../../packages/ui/src/components/typography/Typography.stories';
+import { RadiusScale, SemanticColors } from './Foundations';
+
+export const scales = Object.entries(palette).filter(([, value]) => typeof value !== 'string');
+export const brandColors = Object.fromEntries(
+  Object.entries(palette).filter(([, value]) => typeof value === 'string')
+);
+
+<Meta title="Design System" />
+
+# HaltH Design System
+
+Every HaltH foundation and component on one page. Colours come straight from `@halth/tokens` and the components below are their live stories, so this page updates as soon as the library does.
+
+## Colours
+
+### Semantic
+
+Use these class names in app code (`bg-primary`, `bg-secondary`, `text-muted-foreground`). In HeroUI apps, `bg-accent` is the brand colour and `text-muted` is secondary text.
+
+<SemanticColors />
+
+### Palette
+
+The full scales behind the semantic colours, e.g. `bg-primary-50` or `text-sun-600`. New colours go in `packages/tokens/src/colors.ts`.
+
+<ColorPalette>
+  {scales.map(([name, shades]) => (
+    <ColorItem
+      key={name}
+      title={name}
+      subtitle={`${name}-*`}
+      colors={Object.fromEntries(
+        Object.entries(shades).map(([shade, hex]) => [shade === 'DEFAULT' ? name : shade, hex])
+      )}
+    />
+  ))}
+  <ColorItem title="Brand" subtitle="bg-cream, bg-forestBg, …" colors={brandColors} />
+</ColorPalette>
+
+## Typography
+
+Use `Typography` for every heading, paragraph and label. `variant` sets the scale and `tone` the colour.
+
+<Canvas of={TypographyStories.AllVariants} />
+<Canvas of={TypographyStories.Tones} />
+
+## Radius
+
+<RadiusScale />
+
+## Icons
+
+`@halth/ui/icons`. Icons use `currentColor`; size them with a class such as `size-4`.
+
+<Canvas of={IconsStories.AllIcons} />
+
+## Components
+
+### Button
+
+`@halth/ui/button`
+
+<Canvas of={ButtonStories.AllVariants} />
+<Canvas of={ButtonStories.Sizes} />
+
+### Chip
+
+`@halth/ui/chip`
+
+<Canvas of={ChipStories.AllTones} />
+
+### AttributeChip
+
+`@halth/ui/attribute-chip`, with logos from `@halth/ui/card-logo`
+
+<Canvas of={AttributeChipStories.AllAttributes} />
+
+### Avatar
+
+`@halth/ui/avatar`
+
+<Canvas of={AvatarStories.Sizes} />
+
+### Card
+
+`@halth/ui/card`
+
+<Canvas of={CardStories.WithFooter} />
+<Canvas of={CardStories.Row} />
+<Canvas of={CardStories.Pressable} />
+
+Two layouts (sections and rows) on two surfaces (`white`, `outline`). Padding, surface and row slots are fixed. See **Guidelines → Card**.
+
+### Dropdown
+
+`@halth/ui/dropdown` (requires `framer-motion`)
+
+<Canvas of={DropdownStories.Interactive} />
+<Canvas of={DropdownStories.Invalid} />
+
+### Tabs
+
+`@halth/ui/tabs`
+
+<Canvas of={TabsStories.WhiteTrack} />
+
+### Modal
+
+`@halth/ui/modal`
+
+<Canvas of={ModalStories.Default} />
+
+### BookingCard
+
+`@halth/ui/booking-card`
+
+<Canvas of={BookingCardStories.VerifiedMemberWithAttributes} />
+<Canvas of={BookingCardStories.List} />

@@ -1,0 +1,25 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm build-storybook
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook
+          path: apps/docs/storybook-static
+      # TODO: deploy apps/docs/storybook-static to the internal host (Vercel with SSO, or S3 + CloudFront behind auth).

@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+@import '@heroui/styles';
+@import '@halth/tokens/heroui.css';
+
+@source '../../../packages/ui/src';
+
+body {
+  @apply bg-background text-foreground font-sans;
+}
+
+/* Token names, swatch labels and props tables use the HaltH font; code samples (`pre`) stay monospace. */
+.sbdocs code,
+.sbdocs .docblock-colorpalette *,
+.sbdocs .docblock-argstable * {
+  font-family: var(--font-sans);
+}
