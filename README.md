@@ -28,7 +28,7 @@ See [`CLAUDE.md`](CLAUDE.md) for the rules (one component per job, built on Hero
 2. To release, run `pnpm version-packages` on a branch and open a PR into `main`. It turns the pending changesets into the next versions and changelogs, so the PR shows exactly what will ship.
 3. Once it merges, run **Actions → Release → Run workflow** on `main`. `@halth/tokens` and `@halth/ui` publish to GitHub Packages with the same version, and the version tags are pushed. The workflow stops if changesets are still pending, i.e. step 2 was skipped.
 
-To try a change in a product before it's released, add the `snapshot` label to your PR. The Snapshot workflow publishes a test version (e.g. `0.2.0-canary-20261028120000`) under the `canary` tag and comments the install command on the PR. It republishes on every push while the label is on. Apps on a normal version range never pick up test versions.
+To try a change in a product before it's released, add the `snapshot` label to your PR. The Snapshot workflow publishes a test version (e.g. `0.2.0-dev-20261028120000`) under the `dev` tag and comments the install command on the PR. It republishes on every push while the label is on. Apps on a normal version range never pick up test versions.
 
 ## Use in an app
 

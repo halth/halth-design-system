@@ -1,7 +1,7 @@
 name: Snapshot
 
-# Label a PR "snapshot" to publish its changes as a test version (e.g. 0.2.0-canary-20261028120000)
-# under the `canary` dist-tag, so products can try it before release. Republishes on every push while labelled.
+# Label a PR "snapshot" to publish its changes as a test version (e.g. 0.2.0-dev-20261028120000)
+# under the `dev` dist-tag, so products can try it before release. Republishes on every push while labelled.
 on:
   pull_request:
     types: [labeled, synchronize]
@@ -33,9 +33,9 @@ jobs:
             echo "::error::Add a changeset (pnpm changeset) to publish a test version."
             exit 1
           fi
-      - run: pnpm changeset version --snapshot canary
+      - run: pnpm changeset version --snapshot dev
       - run: pnpm build
-      - run: pnpm changeset publish --tag canary --no-git-tag
+      - run: pnpm changeset publish --tag dev --no-git-tag
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Comment test versions
