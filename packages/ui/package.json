@@ -1,6 +1,6 @@
 {
   "name": "@halth/ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "HaltH shared React component library",
   "license": "UNLICENSED",
   "type": "module",
