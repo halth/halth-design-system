@@ -1,28 +1,22 @@
 name: Release
 
+# Run from the Actions tab once the version PR (`pnpm version-packages`) has merged into main.
+# Publishes every package version that isn't on GitHub Packages yet and pushes its git tag.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency: ${{ github.workflow }}
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      # The HaltH Release app opens the Version PR and pushes to it. Its pushes trigger CI on that PR; GITHUB_TOKEN's don't.
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
-        with:
-          token: ${{ steps.app-token.outputs.token }}
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -31,11 +25,16 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@halth'
       - run: pnpm install --frozen-lockfile
-      # Opens a "Version packages" PR while changesets are pending; publishes to GitHub Packages once it merges.
-      - uses: changesets/action@v1
-        with:
-          version: pnpm version-packages
-          publish: pnpm release
+      - name: Check versions are bumped
+        run: |
+          if [ -n "$(find .changeset -name '*.md' ! -name README.md)" ]; then
+            echo "::error::Unreleased changesets on main. Run pnpm version-packages in a PR to main first."
+            exit 1
+          fi
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - run: pnpm release
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git push origin --tags

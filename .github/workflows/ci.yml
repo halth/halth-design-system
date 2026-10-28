@@ -21,8 +21,9 @@ jobs:
       - run: pnpm test
 
   # Every PR that changes a published package needs a changeset. For tests or stories, add one with `pnpm changeset --empty`.
+  # Version PRs (`pnpm version-packages`) consume the changesets, so they're skipped.
   changeset:
-    if: github.event_name == 'pull_request' && github.head_ref != 'changeset-release/main'
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,4 +35,11 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm changeset status --since=origin/main
+      - run: |
+          for p in packages/*/package.json; do
+            if [ "$(git show origin/main:$p 2>/dev/null | node -p 'JSON.parse(require("fs").readFileSync(0)).version' 2>/dev/null)" != "$(node -p "require('./$p').version")" ]; then
+              echo "$p version changed: version PR, skipping."
+              exit 0
+            fi
+          done
+          pnpm changeset status --since=origin/main

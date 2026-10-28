@@ -10,7 +10,7 @@ The single source of truth for UI components and design tokens across HaltH apps
 - `apps/docs`: Storybook showcase
 
 **Stack:** React 19 + TypeScript, HeroUI v3 (`@heroui/react`, built on React Aria), Tailwind CSS v4
-**Release:** Changesets → "Version packages" PR → GitHub Packages; label a PR `snapshot` for a test version
+**Release:** Changesets → `pnpm version-packages` PR into `main` → run the Release workflow → GitHub Packages; label a PR `snapshot` for a test version
 
 ## ⛔ Critical Rules
 
