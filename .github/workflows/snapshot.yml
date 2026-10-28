@@ -17,10 +17,13 @@ jobs:
   snapshot:
     if: contains(github.event.pull_request.labels.*.name, 'snapshot')
     runs-on: ubuntu-latest
+    env:
+      # setup-node's .npmrc reads this for GitHub Packages, from install through publish.
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
@@ -36,8 +39,6 @@ jobs:
       - run: pnpm changeset version --snapshot dev
       - run: pnpm build
       - run: pnpm changeset publish --tag dev --no-git-tag
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Comment test versions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

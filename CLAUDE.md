@@ -7,7 +7,7 @@ The single source of truth for UI components and design tokens across HaltH apps
 **Monorepo:** pnpm workspaces
 - `packages/tokens` (`@halth/tokens`): colours, radius, fonts; Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets
 - `packages/ui` (`@halth/ui`): React components
-- `apps/docs`: Storybook showcase
+- `apps/docs`: Storybook showcase, deployed to private GitHub Pages at https://ideal-succotash-1gwzw4v.pages.github.io on every merge to `main` (`.github/workflows/docs.yml`)
 
 **Stack:** React 19 + TypeScript, HeroUI v3 (`@heroui/react`, built on React Aria), Tailwind CSS v4
 **Release:** Changesets → `pnpm version-packages` PR into `main` → run the Release workflow → GitHub Packages; label a PR `snapshot` for a test version

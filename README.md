@@ -2,11 +2,13 @@
 
 Shared component library and design tokens for HaltH products.
 
+**Storybook:** https://ideal-succotash-1gwzw4v.pages.github.io shows every component, the design guidelines and the icons. It's private: sign in to GitHub with access to this repo. It redeploys automatically on every merge to `main`.
+
 | Package | Description |
 |---|---|
 | [`@halth/tokens`](packages/tokens) | Colours, radius, fonts. Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets |
 | [`@halth/ui`](packages/ui) | React components built on HeroUI v3 and Tailwind CSS v4 |
-| [`apps/docs`](apps/docs) | Storybook showcase |
+| [`apps/docs`](apps/docs) | Storybook showcase, hosted at https://ideal-succotash-1gwzw4v.pages.github.io |
 
 ## Develop
 
@@ -17,8 +19,6 @@ pnpm storybook        # http://localhost:6006
 pnpm test
 pnpm typecheck
 ```
-
-Storybook for `main` is at https://ideal-succotash-1gwzw4v.pages.github.io (sign in to GitHub with access to this repo). It redeploys on every merge to `main`.
 
 See [`CLAUDE.md`](CLAUDE.md) for the rules (one component per job, built on HeroUI v3). New components live in `packages/ui/src/components/<name>/` with a `<Name>.stories.tsx` and `<Name>.test.tsx`, and get an entry in `packages/ui/vite.config.ts` plus an `exports` path in `packages/ui/package.json`.
 
