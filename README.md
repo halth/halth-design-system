@@ -5,7 +5,7 @@ Shared component library and design tokens for HaltH products.
 | Package | Description |
 |---|---|
 | [`@halth/tokens`](packages/tokens) | Colours, radius, fonts. Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets |
-| [`@halth/ui`](packages/ui) | React components (Radix + cva + Tailwind v4, and wrapped HeroUI v3) |
+| [`@halth/ui`](packages/ui) | React components built on HeroUI v3 and Tailwind CSS v4 |
 | [`apps/docs`](apps/docs) | Storybook showcase |
 
 ## Develop
@@ -22,9 +22,13 @@ See [`CLAUDE.md`](CLAUDE.md) for the rules (one component per job, built on Hero
 
 ## Release
 
-1. Run `pnpm changeset` in your PR and describe the change.
-2. When merged to `main`, the Release workflow opens a "Version packages" PR.
-3. Merging that PR publishes the new versions to GitHub Packages.
+`main` is protected: changes go in through PRs, and merging into `main` publishes nothing.
+
+1. Every PR that changes a package includes a changeset: run `pnpm changeset` and describe the change. CI checks for one; for changes that need no release note (tests, stories), use `pnpm changeset --empty`.
+2. The Release workflow keeps a "Version packages" PR open with the next versions and the combined changelog of everything waiting to ship.
+3. To release, merge that PR. `@halth/tokens` and `@halth/ui` publish to GitHub Packages with the same version.
+
+To try a change in a product before it's released, add the `snapshot` label to your PR. The Snapshot workflow publishes a test version (e.g. `0.2.0-canary-20261028120000`) under the `canary` tag and comments the install command on the PR. It republishes on every push while the label is on. Apps on a normal version range never pick up test versions.
 
 ## Use in an app
 
@@ -34,6 +38,12 @@ Add to the app's `.npmrc`:
 @halth:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
+
+Commit the `.npmrc`, never the token. `GITHUB_TOKEN` must be able to read `@halth` packages wherever the app installs:
+
+- **Locally:** a classic personal access token with `read:packages` (GitHub Packages doesn't accept fine-grained tokens), exported as `GITHUB_TOKEN`.
+- **GitHub Actions:** in each package's settings on GitHub, under Manage Actions access, add the app's repo. Then give the job `permissions: packages: read` and set `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}` on the install step.
+- **Vercel:** add `GITHUB_TOKEN` as an environment variable, set to a classic token with `read:packages`.
 
 ```bash
 npm install @halth/ui @halth/tokens

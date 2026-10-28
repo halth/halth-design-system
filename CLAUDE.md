@@ -10,7 +10,7 @@ The single source of truth for UI components and design tokens across HaltH apps
 - `apps/docs`: Storybook showcase
 
 **Stack:** React 19 + TypeScript, HeroUI v3 (`@heroui/react`, built on React Aria), Tailwind CSS v4
-**Release:** Changesets → GitHub Packages
+**Release:** Changesets → "Version packages" PR → GitHub Packages; label a PR `snapshot` for a test version
 
 ## ⛔ Critical Rules
 
@@ -46,7 +46,7 @@ Only add `'use client'` when the file itself uses hooks, event handlers or brows
 Use v4 utilities: `outline-hidden`, trailing `!` for important, and plain `hover:` (it already applies only on devices that can hover).
 
 ### Accessible By Default
-Stories run the a11y addon with `test: 'error'`. Text needs 4.5:1 contrast. Warning (amber) text on a tint uses `sun-800` (`sun-600` is 2:1 and only the existing warning `Chip` still uses it), and muted text on `bg-secondary` uses `charcoal`. Don't nest interactive elements; for a pressable card with buttons inside, use a stretched `<button>` beside them (see `BookingCard`).
+Stories run the a11y addon with `test: 'error'`. Text needs 4.5:1 contrast. Warning (amber) is `sun-600`: the `--warning` token, Typography `tone="warning"` and the warning `Chip`. It's an accepted exception to the contrast rule (2:1 on `sun-100`); the longer text in `Alert` uses `sun-800`. Muted text on `bg-secondary` uses `charcoal`. Don't nest interactive elements; for a pressable card with buttons inside, use a stretched `<button>` beside them (see `BookingCard`).
 
 ### Minimal Strategic Comments Only
 JSDoc for public props and exports; otherwise only comment non-obvious logic.

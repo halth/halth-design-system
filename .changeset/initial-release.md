@@ -3,4 +3,8 @@
 '@halth/ui': minor
 ---
 
-Initial release: shared design tokens (Tailwind v4 theme, HeroUI v3 theme, Tailwind v3 and NativeWind presets) and components built on HeroUI v3 and Tailwind CSS v4: Avatar, BookingCard, Button (with press ripple, and `buttonVariants` for links), Card, Chip, Dropdown, Modal, Tabs and Typography.
+Initial release.
+
+`@halth/tokens`: colours, radius (`rounded-pill`, `rounded-container`, `rounded-tile`), icon sizes (`--icon-xs` … `--icon-2xl`), motion (`--duration-fast|base|slow`, `ease-standard`, `ease-out`, `transitions`) and the HaltH type scale (`text-h1` … `text-caption`). Ships as a Tailwind v4 `theme.css`, a HeroUI v3 `heroui.css`, `variables.css`, and Tailwind v3 and NativeWind presets.
+
+`@halth/ui`: components built on HeroUI v3 and Tailwind CSS v4: `Alert`, `AttributeChip`, `Avatar`, `Badge`, `BookingCard`, `Button` (with `buttonVariants` for links), `Card`, `CardLogo`, `Checkbox`, `Chip`, `CopyButton`, `Dropdown` (needs `framer-motion`), `EmptyState`, `Input`, `Modal`, `Skeleton`, `Spinner`, `Switch`, `Tabs`, `Tooltip` and `Typography`, plus Lucide icons under HaltH names from `@halth/ui/icons`.
