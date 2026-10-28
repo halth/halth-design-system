@@ -1,18 +1,19 @@
 name: Release
 
+# Run from the Actions tab once the version PR (`pnpm version-packages`) has merged into main.
+# Publishes every package version that isn't on GitHub Packages yet and pushes its git tag.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency: ${{ github.workflow }}
 
 permissions:
   contents: write
   packages: write
-  pull-requests: write
 
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,11 +25,16 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@halth'
       - run: pnpm install --frozen-lockfile
-      # Opens a "Version packages" PR while changesets are pending; publishes to GitHub Packages once it merges.
-      - uses: changesets/action@v1
-        with:
-          version: pnpm version-packages
-          publish: pnpm release
+      - name: Check versions are bumped
+        run: |
+          if [ -n "$(find .changeset -name '*.md' ! -name README.md)" ]; then
+            echo "::error::Unreleased changesets on main. Run pnpm version-packages in a PR to main first."
+            exit 1
+          fi
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - run: pnpm release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git push origin --tags

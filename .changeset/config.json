@@ -1,9 +1,20 @@
 {
   "$schema": "https://unpkg.com/@changesets/config/schema.json",
   "changelog": "@changesets/cli/changelog",
+  "fixed": [
+    [
+      "@halth/tokens",
+      "@halth/ui"
+    ]
+  ],
   "commit": false,
   "access": "restricted",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@halth/docs"]
+  "ignore": [
+    "@halth/docs"
+  ],
+  "snapshot": {
+    "useCalculatedVersion": true
+  }
 }

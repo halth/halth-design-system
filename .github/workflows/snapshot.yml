@@ -1,0 +1,53 @@
+name: Snapshot
+
+# Label a PR "snapshot" to publish its changes as a test version (e.g. 0.2.0-dev-20261028120000)
+# under the `dev` dist-tag, so products can try it before release. Republishes on every push while labelled.
+on:
+  pull_request:
+    types: [labeled, synchronize]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  snapshot:
+    if: contains(github.event.pull_request.labels.*.name, 'snapshot')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: '@halth'
+      - run: pnpm install --frozen-lockfile
+      - name: Check for changesets
+        run: |
+          if [ -z "$(find .changeset -name '*.md' ! -name README.md)" ]; then
+            echo "::error::Add a changeset (pnpm changeset) to publish a test version."
+            exit 1
+          fi
+      - run: pnpm changeset version --snapshot dev
+      - run: pnpm build
+      - run: pnpm changeset publish --tag dev --no-git-tag
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Comment test versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          ui=$(node -p "require('./packages/ui/package.json').version")
+          tokens=$(node -p "require('./packages/tokens/package.json').version")
+          body="Test version published:
+
+          \`\`\`bash
+          pnpm add @halth/ui@$ui @halth/tokens@$tokens
+          \`\`\`"
+          gh pr comment "$PR" --edit-last --body "$body" || gh pr comment "$PR" --body "$body"

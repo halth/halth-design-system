@@ -1,7 +1,8 @@
 {
   "name": "@halth/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "HaltH design tokens: colours, radius, fonts, Tailwind v4 theme, HeroUI v3 theme and Tailwind v3/NativeWind presets",
+  "license": "UNLICENSED",
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -37,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/halth/halth-ui.git",
+    "url": "git+https://github.com/halth/halth-ui.git",
     "directory": "packages/tokens"
   },
   "scripts": {
