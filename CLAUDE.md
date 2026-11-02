@@ -67,6 +67,7 @@ Every component has a `<Name>.stories.tsx` with `tags: ['autodocs']`, so it gets
 - **One story per variant**, named after it (`Primary`, `Secondary`, `Outline`, `Danger`…), so each appears under the component in the sidebar, can be linked directly, and is checked separately by the a11y addon.
 - **One overview story** (`All variants`) showing every variant side by side.
 - **Key states** as their own stories: sizes, disabled, pending/loading, with icon, invalid, and so on.
+- **A `Mobile` story** for components whose layout changes at the `sm` breakpoint, set with `globals: { viewport: { value: 'mobile', isRotated: false } }`. The viewport presets (small mobile, mobile, tablet, desktop) are in `apps/docs/.storybook/preview.tsx` and in the toolbar on every story.
 - **Realistic HaltH labels** ("Cancel booking", not "Button").
 - Set variants through `args` so the controls panel works on every story; use `render` only for grids or composed examples.
 - Smaller components: main variants plus a few key states; leave the rest to controls.

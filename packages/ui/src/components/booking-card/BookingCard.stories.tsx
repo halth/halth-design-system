@@ -181,3 +181,9 @@ export const Skeleton: Story = {
     </div>
   ),
 };
+
+/** Below `sm` the card stacks: client on top, booking details underneath. */
+export const Mobile: Story = {
+  ...List,
+  globals: { viewport: { value: 'mobile', isRotated: false } },
+};

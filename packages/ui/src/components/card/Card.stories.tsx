@@ -248,3 +248,9 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+/** Row cards use `p-3` below `sm` and section cards `p-4`, a step tighter than on desktop. */
+export const Mobile: Story = {
+  render: () => <CheckoutPayersExample />,
+  globals: { viewport: { value: 'mobile', isRotated: false } },
+};
