@@ -1,4 +1,4 @@
-# @halth/tokens
+# @halth/design-system-tokens
 
 ## 0.1.0
 

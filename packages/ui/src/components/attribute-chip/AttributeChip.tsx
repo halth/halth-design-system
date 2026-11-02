@@ -10,7 +10,7 @@ const CHIP_CLASS =
 export interface AttributeChipProps {
   /** Tooltip text and accessible name, e.g. "Payment method" or "Missing card details". */
   label: string;
-  /** A `CardLogo` or an icon from `@halth/ui/icons`. */
+  /** A `CardLogo` or an icon from `@halth/design-system/icons`. */
   children: ReactNode;
   /** Makes the chip a button, e.g. to open the payment method or add a card. */
   onPress?: () => void;

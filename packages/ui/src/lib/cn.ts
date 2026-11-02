@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 
-/** `@halth/tokens` classes, so `text-h1` and `text-primary` (or `rounded-pill` and `rounded-b-none`) merge correctly. */
+/** `@halth/design-system-tokens` classes, so `text-h1` and `text-primary` (or `rounded-pill` and `rounded-b-none`) merge correctly. */
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {

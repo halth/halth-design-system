@@ -1,4 +1,4 @@
-# @halth/ui
+# @halth/design-system
 
 ## 0.1.0
 

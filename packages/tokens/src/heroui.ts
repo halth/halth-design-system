@@ -6,7 +6,7 @@ const semantic = (name: SemanticColor) => `hsl(${semanticValues[name]})`;
 
 /**
  * HaltH values for HeroUI v3's theme variables, written to
- * `@halth/tokens/heroui.css`.
+ * `@halth/design-system-tokens/heroui.css`.
  *
  * HeroUI uses `muted` for secondary text and `accent` for the brand colour,
  * so in HeroUI apps those two names follow HeroUI rather than shadcn. Use

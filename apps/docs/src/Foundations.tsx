@@ -1,4 +1,4 @@
-import { radii } from '@halth/tokens';
+import { radii } from '@halth/design-system-tokens';
 
 const SEMANTIC_COLORS = [
   { name: 'background', className: 'bg-background', use: 'Page background' },

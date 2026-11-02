@@ -3,8 +3,8 @@
   "changelog": "@changesets/cli/changelog",
   "fixed": [
     [
-      "@halth/tokens",
-      "@halth/ui"
+      "@halth/design-system-tokens",
+      "@halth/design-system"
     ]
   ],
   "commit": false,
@@ -12,7 +12,7 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@halth/docs"
+    "@halth/design-system-docs"
   ],
   "snapshot": {
     "useCalculatedVersion": true

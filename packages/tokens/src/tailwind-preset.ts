@@ -17,7 +17,7 @@ const semanticColors = Object.fromEntries(
 );
 
 /**
- * Tailwind v3 preset. Pair with `@halth/tokens/variables.css` for the
+ * Tailwind v3 preset. Pair with `@halth/design-system-tokens/variables.css` for the
  * semantic CSS variables.
  */
 const preset = {

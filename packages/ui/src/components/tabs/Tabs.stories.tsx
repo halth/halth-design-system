@@ -85,3 +85,9 @@ export const DisabledTab: Story = {
     </Tabs>
   ),
 };
+
+/** Below `sm` the tabs stretch to fill the track. */
+export const Mobile: Story = {
+  render,
+  globals: { viewport: { value: 'mobile', isRotated: false } },
+};

@@ -32,8 +32,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function Demo({ label = 'Cancel booking', ...args }: Partial<ModalProps> & { label?: string }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Demo({
+  label = 'Cancel booking',
+  isDefaultOpen = false,
+  ...args
+}: Partial<ModalProps> & { label?: string; isDefaultOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(isDefaultOpen);
   return (
     <>
       <Button onPress={() => setIsOpen(true)}>{label}</Button>
@@ -68,6 +72,13 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
+};
+
+/** Below `sm` the modal is a bottom sheet, within reach of a thumb. Left off the Docs page because it opens over it. */
+export const Mobile: Story = {
+  render: () => <Demo isDefaultOpen />,
+  globals: { viewport: { value: 'mobile', isRotated: false } },
+  tags: ['!autodocs'],
 };
 
 export const OpaqueBackdrop: Story = { render: () => <Demo backdrop="opaque" label="Open opaque" /> };

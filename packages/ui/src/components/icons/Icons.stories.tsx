@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'HaltH icons: Lucide, one per job. Import from `@halth/ui/icons`. They inherit `currentColor`; size them with `size-(--icon-*)`.',
+          'HaltH icons: Lucide, one per job. Import from `@halth/design-system/icons`. They inherit `currentColor`; size them with `size-(--icon-*)`.',
       },
     },
   },

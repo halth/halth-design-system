@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { Typography } from '../typography';
 import { Avatar } from './Avatar';
 
 const BuildingIcon = () => (
@@ -22,13 +25,14 @@ const meta = {
     docs: {
       description: {
         component:
-          'HeroUI v3 `Avatar` with HaltH sizes. Always a rounded square; shows initials from `name` when there is no image.',
+          'HeroUI v3 `Avatar` with HaltH sizes. Always a rounded square; shows initials from `name` when there is no image. Set `isSelected` to use it as a picker option.',
       },
     },
   },
   args: { name: 'Jordan Lee' },
   argTypes: {
     size: { control: 'select', options: sizes },
+    isSelected: { control: 'boolean' },
   },
 } satisfies Meta<typeof Avatar>;
 
@@ -47,4 +51,53 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
+};
+
+export const Selected: Story = { args: { size: 'lg', isSelected: true } };
+export const Unselected: Story = { args: { size: 'lg', isSelected: false } };
+
+const PROVIDERS = [
+  { id: 'any', name: 'Next available', fallback: 'Any' },
+  { id: 'jordan', name: 'Jordan Lee' },
+  { id: 'sam', name: 'Sam Patel', src: PHOTO },
+];
+
+/** A provider picker: each option is a `group` with a stretched button, so hovering the name highlights the avatar too. */
+export const ProviderPicker: Story = {
+  render: () => {
+    const [selectedId, setSelectedId] = useState('any');
+    return (
+      <div className="flex gap-3">
+        {PROVIDERS.map((provider) => {
+          const isSelected = provider.id === selectedId;
+          return (
+            <div key={provider.id} className="group relative flex w-20 flex-col items-center gap-2">
+              <Avatar
+                size="lg"
+                name={provider.name}
+                src={provider.src}
+                fallback={provider.fallback}
+                isSelected={isSelected}
+              />
+              <Typography
+                variant="caption"
+                weight={isSelected ? 'medium' : 'regular'}
+                tone={isSelected ? 'brand' : 'mutedGray'}
+                align="center"
+              >
+                {provider.name}
+              </Typography>
+              <button
+                type="button"
+                aria-pressed={isSelected}
+                aria-label={provider.name}
+                onClick={() => setSelectedId(provider.id)}
+                className="absolute inset-0 cursor-pointer rounded-tile focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+              />
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
 };

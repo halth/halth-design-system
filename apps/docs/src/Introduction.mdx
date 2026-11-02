@@ -2,12 +2,12 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Introduction" />
 
-# HaltH UI
+# HaltH Design System
 
-The shared component library used across HaltH products. See **Guidelines** for the design concepts and rules (when to use what), and **Design System** for every colour, type style and component on one page.
+The HaltH Design System is the shared component library used across HaltH products. See **Guidelines** for the design concepts and rules (when to use what), and **Design System** for every colour, type style and component on one page.
 
-- **`@halth/ui`:** React components built on HeroUI v3 (Button, Card, …)
-- **`@halth/tokens`:** Colours, radius, fonts, Tailwind v4 / HeroUI v3 themes and Tailwind v3 / NativeWind presets
+- **`@halth/design-system`:** React components built on HeroUI v3 (Button, Card, …)
+- **`@halth/design-system-tokens`:** Colours, radius, fonts, Tailwind v4 / HeroUI v3 themes and Tailwind v3 / NativeWind presets
 
 ## Install
 
@@ -15,7 +15,7 @@ The shared component library used across HaltH products. See **Guidelines** for 
 # .npmrc
 @halth:registry=https://npm.pkg.github.com
 
-npm install @halth/ui @halth/tokens
+npm install @halth/design-system @halth/design-system-tokens
 ```
 
 ## Tailwind v4 + HeroUI v3
@@ -24,14 +24,14 @@ npm install @halth/ui @halth/tokens
 /* globals.css */
 @import 'tailwindcss';
 @import '@heroui/styles';
-@import '@halth/tokens/heroui.css';
-@source '../node_modules/@halth/ui/dist';
+@import '@halth/design-system-tokens/heroui.css';
+@source '../node_modules/@halth/design-system/dist';
 ```
 
 ## Usage
 
 ```tsx
-import { Button } from '@halth/ui/button';
+import { Button } from '@halth/design-system/button';
 
 <Button variant="outline" onPress={save}>Save</Button>
 ```
