@@ -155,9 +155,9 @@ Where components use the scale:
 - **`Modal`:** title `h4` regular in brand green, body `body`.
 - **`CardTitle`:** `h4` medium. **`CardDescription`:** `bodySmall`.
 - **`Dropdown`:** value and placeholder in `body`.
-- **`Avatar` initials:** `caption` (`xs`) up to `h3` (`xl`).
+- **`Avatar` initials:** `caption` (`xs`) up to `h3` (`xl`), always regular.
 
-Weights: `regular` by default, `medium` for names, tabs and emphasis, and `semibold` for `h3`/`h4` and chip labels. Choose the element for meaning and the variant for looks, e.g. `<Typography as="h3" variant="subtitle">`.
+Weights: `regular` by default (including avatar initials), `medium` for names, tabs and emphasis, and `semibold` for `h3`/`h4` and chip labels. Choose the element for meaning and the variant for looks, e.g. `<Typography as="h3" variant="subtitle">`.
 
 ## Spacing
 
@@ -288,6 +288,10 @@ On mobile the tabs stretch to full width; from `sm` up each tab is 192px wide (`
 ### Avatar
 
 People's photos, with initials as the fallback. Always a rounded square (`rounded-tile`), never a circle, so people and organisations look the same everywhere. Use `fallback` for an icon, e.g. for organisations.
+
+In a picker (e.g. choosing a provider), set `isSelected`. Selected avatars get a 2px `border-primary` and a `bg-primary-100` fallback; unselected ones get a transparent border (so nothing shifts when selected) and a `bg-stone-50` fallback that turns `bg-stone-100` on hover. The avatar isn't pressable itself: put it and its label in a `group` with a stretched `<button>` (`aria-pressed`), like `BookingCard`, so the whole option is one press target and hovering the label highlights the avatar. Leave `isSelected` unset everywhere else.
+
+`className` is for placement only (margin, flex or grid placement), as with `Card`. If an app needs the avatar to look different, add a prop here rather than restyling it with `className`.
 
 ### Dropdown
 
