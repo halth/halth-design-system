@@ -1,5 +1,18 @@
 # @halth/design-system
 
+## 0.2.0
+
+### Minor Changes
+
+- a9ec447: `Avatar` takes `isSelected` for pickers: a 2px brand border and `bg-primary-100` fallback when selected, and a `bg-stone-50` fallback that turns `bg-stone-100` on hover (from a `group` parent) when not.
+- 7d6b95b: The library is now the HaltH Design System. `@halth/ui` is published as `@halth/design-system` and `@halth/tokens` as `@halth/design-system-tokens`; the exports are unchanged. In apps, replace `@halth/ui` with `@halth/design-system` and `@halth/tokens` with `@halth/design-system-tokens` in imports, `package.json`, and the CSS `@import '@halth/design-system-tokens/heroui.css'` and `@source '../node_modules/@halth/design-system/dist'` lines.
+
+### Patch Changes
+
+- a9ec447: Avatar initials are now regular weight (400) instead of medium (500), at every size.
+- Updated dependencies [7d6b95b]
+  - @halth/design-system-tokens@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
