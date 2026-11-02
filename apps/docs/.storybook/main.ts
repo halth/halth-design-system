@@ -11,7 +11,7 @@ const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   async viteFinal(viteConfig) {
     viteConfig.plugins = [...(viteConfig.plugins ?? []), tailwindcss()];
-    // Stories import @halth/ui source, so Vite only discovers its dependencies
+    // Stories import @halth/design-system source, so Vite only discovers its dependencies
     // mid-session and serves stale pre-bundles (504) until restarted.
     viteConfig.optimizeDeps = {
       ...viteConfig.optimizeDeps,

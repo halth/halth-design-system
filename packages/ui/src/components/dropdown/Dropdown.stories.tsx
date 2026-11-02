@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Select-style field trigger. Import from `@halth/ui/dropdown`; requires `framer-motion`.',
+          'Select-style field trigger. Import from `@halth/design-system/dropdown`; requires `framer-motion`.',
       },
     },
   },

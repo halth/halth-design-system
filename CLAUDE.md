@@ -1,12 +1,12 @@
-# HaltH UI - Development Guidelines
+# HaltH Design System - Development Guidelines
 
-The single source of truth for UI components and design tokens across HaltH apps (platform-business-web, platform-member-web, halth-extend, halth-embed) and WellHealth Ops. Apps import components from `@halth/ui` and never build their own versions.
+The single source of truth for UI components and design tokens across HaltH apps (platform-business-web, platform-member-web, halth-extend, halth-embed) and WellHealth Ops. Apps import components from `@halth/design-system` and never build their own versions.
 
 ## 🏗 Architecture
 
 **Monorepo:** pnpm workspaces
-- `packages/tokens` (`@halth/tokens`): colours, radius, fonts; Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets
-- `packages/ui` (`@halth/ui`): React components
+- `packages/tokens` (`@halth/design-system-tokens`): colours, radius, fonts; Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets
+- `packages/ui` (`@halth/design-system`): React components
 - `apps/docs`: Storybook showcase, deployed to private GitHub Pages at https://ideal-succotash-1gwzw4v.pages.github.io on every merge to `main` (`.github/workflows/docs.yml`)
 
 **Stack:** React 19 + TypeScript, HeroUI v3 (`@heroui/react`, built on React Aria), Tailwind CSS v4
@@ -20,14 +20,14 @@ The single source of truth for UI components and design tokens across HaltH apps
 ### One Component Per Job
 There is exactly one `Button`, one `Card`, and so on. Never add a second component for the same job (no `AppButton`, `ActionButton`, `PrimaryButton`). If an app needs a new look, add a variant or prop to the existing component.
 
-Components are built from each other: text uses `Typography` or `typographyVariants()` (never `text-sm`/`font-*` classes directly), corners use the radius tokens (`rounded-pill`, `rounded-container`, `rounded-tile`; `rounded-full` only for circles), icons use `size-(--icon-*)`, motion uses `--duration-*`/`ease-*` or `transitions` from `@halth/tokens`, and anything that looks like a button is `Button` (the modal close button, actions in cards). The only raw `<button>`s are invisible stretched overlays for pressable cards.
+Components are built from each other: text uses `Typography` or `typographyVariants()` (never `text-sm`/`font-*` classes directly), corners use the radius tokens (`rounded-pill`, `rounded-container`, `rounded-tile`; `rounded-full` only for circles), icons use `size-(--icon-*)`, motion uses `--duration-*`/`ease-*` or `transitions` from `@halth/design-system-tokens`, and anything that looks like a button is `Button` (the modal close button, actions in cards). The only raw `<button>`s are invisible stretched overlays for pressable cards.
 
-Current components, one per job: `Alert`, `AttributeChip`, `Avatar`, `Badge` (counts), `BookingCard`, `Button`, `Card`, `CardLogo`, `Checkbox`, `Chip` (status pills), `CopyButton`, `Dropdown`, `EmptyState`, `Input` (all text fields, including search), `Modal`, `Skeleton`, `Spinner`, `Switch`, `Tabs`, `Tooltip`, `Typography` (all text: there is no separate `Text`, and apps shouldn't use raw `<h1>`/`<p>`). Icons come from `@halth/ui/icons` (Lucide under HaltH names), never from `lucide-react` directly.
+Current components, one per job: `Alert`, `AttributeChip`, `Avatar`, `Badge` (counts), `BookingCard`, `Button`, `Card`, `CardLogo`, `Checkbox`, `Chip` (status pills), `CopyButton`, `Dropdown`, `EmptyState`, `Input` (all text fields, including search), `Modal`, `Skeleton`, `Spinner`, `Switch`, `Tabs`, `Tooltip`, `Typography` (all text: there is no separate `Text`, and apps shouldn't use raw `<h1>`/`<p>`). Icons come from `@halth/design-system/icons` (Lucide under HaltH names), never from `lucide-react` directly.
 
 Presentational components that show API data (e.g. `BookingCard`) take display props, never app API types like `Booking`, and never call APIs. Apps do the mapping.
 
 ### Build On HeroUI v3
-Interactive components wrap HeroUI v3 primitives from `@heroui/react`. Apply HaltH styling through HeroUI's CSS variables (e.g. `--button-bg`, `--button-bg-hover`, `--button-bg-pressed`) or Tailwind classes. Don't add Radix, cva or another UI library without agreeing it first. Icons are the agreed exception: `lucide-react`, re-exported from `@halth/ui/icons`.
+Interactive components wrap HeroUI v3 primitives from `@heroui/react`. Apply HaltH styling through HeroUI's CSS variables (e.g. `--button-bg`, `--button-bg-hover`, `--button-bg-pressed`) or Tailwind classes. Don't add Radix, cva or another UI library without agreeing it first. Icons are the agreed exception: `lucide-react`, re-exported from `@halth/design-system/icons`.
 
 Where HeroUI v3 documents a companion package, use that package rather than writing our own.
 
@@ -76,7 +76,7 @@ See `packages/ui/src/components/button/Button.stories.tsx` for the reference exa
 ## 🏷 Naming Conventions
 
 - **Components:** PascalCase (`Button.tsx`, `Dropdown.tsx`)
-- **Component folders and subpaths:** kebab-case (`date-picker`, `@halth/ui/date-picker`)
+- **Component folders and subpaths:** kebab-case (`date-picker`, `@halth/design-system/date-picker`)
 - **Variables/Functions/Props:** camelCase; boolean props use `is*` (`isPending`, `isIconOnly`), matching HeroUI
 - **Events:** `onPress`, not `onClick`, matching HeroUI
 

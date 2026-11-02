@@ -13,7 +13,7 @@ import { RadiusScale } from './Foundations';
 
 # Design guidelines
 
-What HaltH UI uses, where to use it and why. Everything on this page is built into the tokens and components. **Design System** shows them all.
+What the HaltH Design System uses, where to use it and why. Everything on this page is built into the tokens and components. **Design System** shows them all.
 
 ## Design language
 
@@ -21,7 +21,7 @@ What HaltH UI uses, where to use it and why. Everything on this page is built in
 
 <RadiusScale />
 
-Radii are tokens in `@halth/tokens` (`radii`), named by role so changing one changes every component that uses it:
+Radii are tokens in `@halth/design-system-tokens` (`radii`), named by role so changing one changes every component that uses it:
 
 - **`rounded-pill`:** buttons, chips, tabs and skeleton bars. Things you press or scan are pills, so they look different from content.
 - **`rounded-container` (16px):** cards, modals, fields, dropdowns and attribute chips. It gives containers a soft edge without looking like a button. HeroUI fields get it from `--field-radius`, which uses the same token.
@@ -42,12 +42,12 @@ Cards on the page have no border. They stand out because they are white on `ston
 
 ### Elevation
 
-- **No shadows.** `Modal` and the `Tabs` indicator turn off HeroUI's shadows (`shadow-none`), and `@halth/tokens` sets HeroUI's `--field-shadow` to transparent so fields, checkboxes and switches are flat. Layers are shown by colour instead, which keeps screens flat and calm.
+- **No shadows.** `Modal` and the `Tabs` indicator turn off HeroUI's shadows (`shadow-none`), and `@halth/design-system-tokens` sets HeroUI's `--field-shadow` to transparent so fields, checkboxes and switches are flat. Layers are shown by colour instead, which keeps screens flat and calm.
 - **Blurred backdrop** behind modals by default, so the task in front stands out. Use `backdrop="opaque"` where blur is too heavy, e.g. in embeds.
 
 ### Icons
 
-`@halth/ui/icons` re-exports Lucide (`lucide-react`) under HaltH names: a 24px grid, a 2px round stroke and `currentColor`, so icons always match their text. There is one icon per job, so don't import Lucide directly. The full set is in **Components → Icons**.
+`@halth/design-system/icons` re-exports Lucide (`lucide-react`) under HaltH names: a 24px grid, a 2px round stroke and `currentColor`, so icons always match their text. There is one icon per job, so don't import Lucide directly. The full set is in **Components → Icons**.
 
 - **Status and feedback:** `CheckIcon` (paid, verified), `CircleCheckIcon`, `CircleXIcon`, `AlertCircleIcon` (errors), `AlertTriangleIcon` (warnings), `InfoIcon`, `HelpCircleIcon`, `ClockIcon` (awaiting payment), `BanIcon`, `BadgeCheckIcon`, `ShieldCheckIcon`, `ShieldIcon`, `LockIcon`.
 - **Actions:** `PlusIcon` (add), `MinusIcon`, `XIcon` (remove or dismiss), `PencilIcon` (edit), `Trash2Icon` (delete), `DeleteIcon` (backspace), `CopyIcon`, `ShareIcon`, `PaperPlaneIcon` (invite and send), `DownloadIcon`, `UploadIcon`, `PrinterIcon`, `SearchIcon`, `RotateCcwIcon`, `RepeatIcon`, `PauseIcon`, `EllipsisVerticalIcon` (more options), `GripVerticalIcon` (drag), `MenuIcon`.
@@ -84,7 +84,7 @@ Avatars come in 32, 40, 56, 64 and 88px (`xs`–`xl`).
 
 ### Motion
 
-Durations and easings are tokens: CSS variables for Tailwind (`duration-(--duration-fast)`, `ease-standard`) and JS values for Motion/framer-motion (`transitions.base` from `@halth/tokens`).
+Durations and easings are tokens: CSS variables for Tailwind (`duration-(--duration-fast)`, `ease-standard`) and JS values for Motion/framer-motion (`transitions.base` from `@halth/design-system-tokens`).
 
 - **`--duration-fast` (150ms) and `--duration-slow` (500ms):** list cards. The hover colour comes in fast and fades out slowly, so it doesn't flicker as the pointer moves down a list.
 - **`transitions.base` (250ms, `easings.standard`):** the dropdown chevron rotating open. Use it for anything that opens, closes or rotates.
@@ -135,11 +135,11 @@ Interactive things tint toward the brand green, so feedback looks the same every
 
 ## Typography
 
-**Helvetica Neue** is the only font, set by `--font-sans` in `@halth/tokens`. Each app loads the font files itself (see `platform-business-web` `layout.tsx`). Where an app doesn't define `--font-helvetica-neue`, the token falls back to `"Helvetica Neue"`. Storybook uses the same stack for its own UI and docs pages (`.storybook/theme.ts`), and `src/styles.css` applies it to inline code, colour swatch labels and props tables. Only multi-line code samples stay monospace.
+**Helvetica Neue** is the only font, set by `--font-sans` in `@halth/design-system-tokens`. Each app loads the font files itself (see `platform-business-web` `layout.tsx`). Where an app doesn't define `--font-helvetica-neue`, the token falls back to `"Helvetica Neue"`. Storybook uses the same stack for its own UI and docs pages (`.storybook/theme.ts`), and `src/styles.css` applies it to inline code, colour swatch labels and props tables. Only multi-line code samples stay monospace.
 
-The type scale lives in `@halth/tokens` (`typeScale`) and becomes Tailwind classes, `text-h1` to `text-caption` (`bodySmall` is `text-body-small`). Each class sets size, line height, letter spacing and default weight, so a style is the same everywhere it's used.
+The type scale lives in `@halth/design-system-tokens` (`typeScale`) and becomes Tailwind classes, `text-h1` to `text-caption` (`bodySmall` is `text-body-small`). Each class sets size, line height, letter spacing and default weight, so a style is the same everywhere it's used.
 
-Use `Typography` for all text. Inside components, where the text sits in another element (a HeroUI button, chip or tab), use `typographyVariants()`. Every `@halth/ui` component builds its text this way, so changing the scale in tokens changes the whole library.
+Use `Typography` for all text. Inside components, where the text sits in another element (a HeroUI button, chip or tab), use `typographyVariants()`. Every `@halth/design-system` component builds its text this way, so changing the scale in tokens changes the whole library.
 
 - **`h1`–`h4`:** page, section, card and group titles.
 - **`subtitle`:** a client's name on `BookingCard`.
@@ -264,7 +264,7 @@ Read-only cards have no hover or focus state.
 
 #### When a card becomes its own component
 
-If a card needs more than a section or a row, such as several regions, a status that the component maps to a `Chip`, or rows of attribute chips, it becomes its own component named after its job, like `BookingCard`. It reuses `Card`'s surface and pressable states inside `@halth/ui`, takes display props (never API types) and lives in its own folder with stories and tests. Apps don't build their own complex cards out of `Card` and `className`.
+If a card needs more than a section or a row, such as several regions, a status that the component maps to a `Chip`, or rows of attribute chips, it becomes its own component named after its job, like `BookingCard`. It reuses `Card`'s surface and pressable states inside `@halth/design-system`, takes display props (never API types) and lives in its own folder with stories and tests. Apps don't build their own complex cards out of `Card` and `className`.
 
 ### BookingCard
 

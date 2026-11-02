@@ -1,6 +1,6 @@
 // framer-motion components are only exported from their own subpaths
-// (e.g. `@halth/ui/dropdown`) so apps without it can still import
-// from `@halth/ui`.
+// (e.g. `@halth/design-system/dropdown`) so apps without it can still import
+// from `@halth/design-system`.
 export * from './alert';
 export * from './attribute-chip';
 export * from './avatar';

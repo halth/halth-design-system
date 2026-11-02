@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 
-import { transitions } from '@halth/tokens';
+import { transitions } from '@halth/design-system-tokens';
 import { motion } from 'framer-motion';
 
 import { cn } from '../../lib/cn';

@@ -1,5 +1,5 @@
 import { Canvas, ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks';
-import { palette } from '@halth/tokens';
+import { palette } from '@halth/design-system-tokens';
 
 import * as AttributeChipStories from '../../../packages/ui/src/components/attribute-chip/AttributeChip.stories';
 import * as AvatarStories from '../../../packages/ui/src/components/avatar/Avatar.stories';
@@ -23,7 +23,7 @@ export const brandColors = Object.fromEntries(
 
 # HaltH Design System
 
-Every HaltH foundation and component on one page. Colours come straight from `@halth/tokens` and the components below are their live stories, so this page updates as soon as the library does.
+Every HaltH foundation and component on one page. Colours come straight from `@halth/design-system-tokens` and the components below are their live stories, so this page updates as soon as the library does.
 
 ## Colours
 
@@ -64,7 +64,7 @@ Use `Typography` for every heading, paragraph and label. `variant` sets the scal
 
 ## Icons
 
-`@halth/ui/icons`. Icons use `currentColor`; size them with a class such as `size-4`.
+`@halth/design-system/icons`. Icons use `currentColor`; size them with a class such as `size-4`.
 
 <Canvas of={IconsStories.AllIcons} />
 
@@ -72,32 +72,32 @@ Use `Typography` for every heading, paragraph and label. `variant` sets the scal
 
 ### Button
 
-`@halth/ui/button`
+`@halth/design-system/button`
 
 <Canvas of={ButtonStories.AllVariants} />
 <Canvas of={ButtonStories.Sizes} />
 
 ### Chip
 
-`@halth/ui/chip`
+`@halth/design-system/chip`
 
 <Canvas of={ChipStories.AllTones} />
 
 ### AttributeChip
 
-`@halth/ui/attribute-chip`, with logos from `@halth/ui/card-logo`
+`@halth/design-system/attribute-chip`, with logos from `@halth/design-system/card-logo`
 
 <Canvas of={AttributeChipStories.AllAttributes} />
 
 ### Avatar
 
-`@halth/ui/avatar`
+`@halth/design-system/avatar`
 
 <Canvas of={AvatarStories.Sizes} />
 
 ### Card
 
-`@halth/ui/card`
+`@halth/design-system/card`
 
 <Canvas of={CardStories.WithFooter} />
 <Canvas of={CardStories.Row} />
@@ -107,26 +107,26 @@ Two layouts (sections and rows) on two surfaces (`white`, `outline`). Padding, s
 
 ### Dropdown
 
-`@halth/ui/dropdown` (requires `framer-motion`)
+`@halth/design-system/dropdown` (requires `framer-motion`)
 
 <Canvas of={DropdownStories.Interactive} />
 <Canvas of={DropdownStories.Invalid} />
 
 ### Tabs
 
-`@halth/ui/tabs`
+`@halth/design-system/tabs`
 
 <Canvas of={TabsStories.WhiteTrack} />
 
 ### Modal
 
-`@halth/ui/modal`
+`@halth/design-system/modal`
 
 <Canvas of={ModalStories.Default} />
 
 ### BookingCard
 
-`@halth/ui/booking-card`
+`@halth/design-system/booking-card`
 
 <Canvas of={BookingCardStories.VerifiedMemberWithAttributes} />
 <Canvas of={BookingCardStories.List} />

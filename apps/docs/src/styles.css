@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import '@heroui/styles';
-@import '@halth/tokens/heroui.css';
+@import '@halth/design-system-tokens/heroui.css';
 
 @source '../../../packages/ui/src';
 

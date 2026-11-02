@@ -1,5 +1,5 @@
 {
-  "name": "halth-ui",
+  "name": "halth-design-system",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.0.9",
@@ -7,8 +7,8 @@
     "build": "pnpm -r --filter './packages/*' build",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
-    "storybook": "pnpm --filter @halth/docs storybook",
-    "build-storybook": "pnpm --filter @halth/docs build-storybook",
+    "storybook": "pnpm --filter @halth/design-system-docs storybook",
+    "build-storybook": "pnpm --filter @halth/design-system-docs build-storybook",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"

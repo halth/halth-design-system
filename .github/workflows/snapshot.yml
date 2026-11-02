@@ -49,6 +49,6 @@ jobs:
           body="Test version published:
 
           \`\`\`bash
-          pnpm add @halth/ui@$ui @halth/tokens@$tokens
+          pnpm add @halth/design-system@$ui @halth/design-system-tokens@$tokens
           \`\`\`"
           gh pr comment "$PR" --edit-last --body "$body" || gh pr comment "$PR" --body "$body"

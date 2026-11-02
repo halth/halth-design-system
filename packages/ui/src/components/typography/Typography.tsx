@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef, ElementType, Ref } from 'react';
 
 import { cn } from '../../lib/cn';
 
-/** The `@halth/tokens` type scale: each class sets size, line height, letter spacing and default weight. */
+/** The `@halth/design-system-tokens` type scale: each class sets size, line height, letter spacing and default weight. */
 const VARIANTS = {
   h1: 'text-h1',
   h2: 'text-h2',

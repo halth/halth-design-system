@@ -1,5 +1,5 @@
 {
-  "name": "@halth/docs",
+  "name": "@halth/design-system-docs",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,8 +8,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@halth/tokens": "workspace:*",
-    "@halth/ui": "workspace:*",
+    "@halth/design-system-tokens": "workspace:*",
+    "@halth/design-system": "workspace:*",
     "@heroui/react": "^3.2.6",
     "@heroui/styles": "^3.2.6",
     "framer-motion": "^12.43.0",

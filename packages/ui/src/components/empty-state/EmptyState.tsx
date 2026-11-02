@@ -6,7 +6,7 @@ import { cn } from '../../lib/cn';
 import { Typography } from '../typography';
 
 export interface EmptyStateProps {
-  /** An icon from `@halth/ui/icons`, shown in a brand-green tile. */
+  /** An icon from `@halth/design-system/icons`, shown in a brand-green tile. */
   icon: ReactNode;
   title: ReactNode;
   /** Why it's empty, in a sentence. */

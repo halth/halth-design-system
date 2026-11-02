@@ -22,7 +22,7 @@ jobs:
         with:
           path: apps/docs/storybook-static
 
-  # Publishes Storybook to private GitHub Pages (people with access to halth-ui only). PRs build it but never deploy.
+  # Publishes Storybook to private GitHub Pages (people with access to halth-design-system only). PRs build it but never deploy.
   deploy:
     needs: storybook
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
