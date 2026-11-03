@@ -61,7 +61,7 @@ export function Avatar({
     <HeroAvatar
       className={cn(
         SIZES[size],
-        'rounded-tile',
+        'overflow-hidden rounded-tile',
         isSelectable && [
           'border-2 bg-transparent',
           SELECTABLE_MOTION,
@@ -72,10 +72,10 @@ export function Avatar({
       role={name ? 'img' : undefined}
       aria-label={name}
     >
-      {src && <HeroAvatar.Image src={src} alt="" className="rounded-tile" />}
+      {src && <HeroAvatar.Image src={src} alt="" />}
       <HeroAvatar.Fallback
         className={cn(
-          'rounded-tile text-[length:inherit] [font-weight:inherit] text-primary',
+          'text-[length:inherit] [font-weight:inherit] text-primary',
           !isSelectable && 'bg-primary-200',
           isSelectable && SELECTABLE_MOTION,
           isSelected === true && 'bg-primary-100',

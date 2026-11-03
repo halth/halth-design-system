@@ -1,0 +1,22 @@
+[13:29:22.126] [INFO] storybook v10.6.5
+[13:29:22.475] [DEBUG] Getting package.json info for /Users/brendan/Documents/HaltH-Code/halth-ui/apps/docs/package.json...
+[13:29:22.597] [DEBUG] Could not determine @babel/preset-env version in use. In case of runtime errors with @babel/preset-env, you may need to set the babelRemoveBugfixes feature flag in your `main.ts` file.
+[13:29:22.719] [INFO] Starting...
+[13:29:22.733] [WARN] No story files found for the specified pattern: src/**/*.stories.@(ts|tsx)
+[13:29:22.734] [DEBUG] readDependencyManifest: could not resolve "@halth/design-system"
+[13:29:22.900] [DEBUG] Starting preview..
+[13:29:22.977] [INFO] Vite Re-optimizing dependencies because vite config has changed
+[13:29:23.004] [DEBUG] Change detection enabled.
+[13:29:23.004] [DEBUG] Change detection: snapshotting Vite resolve config (restart required if vite.config.ts changes)
+[13:29:23.004] [DEBUG] Change detection: ignored 12 regex alias(es); related modules tracked as opaque-leaf.
+[13:29:23.004] [DEBUG] ChangeDetectionResolverFactory: skipped regex aliases [/^@storybook\/global$/, /^storybook\/test$/, /^storybook\/actions$/, /^storybook\/preview-api$/, /^storybook\/internal\/channels$/, /^storybook\/internal\/client-logger$/, /^storybook\/internal\/core-events$/, /^storybook\/internal\/preview-errors$/, /^storybook\/internal\/types$/, /^storybook\/internal\/preview-api$/, /^\/?@vite\/env/, /^\/?@vite\/client/]
+[13:29:23.025] [ERROR] [38;2;241;97;97mError: listen EADDRINUSE: address already in use 127.0.0.1:6006[39m
+    at Server.setupListenHandle [as _listen2] (node:net:2324:16)
+    at listenInCluster (node:net:2433:12)
+    at node:net:2662:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[13:29:23.026] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[13:29:23.085] [DEBUG] ChangeDetectionResolverFactory: '@halth/design-system-tokens' from '/Users/brendan/Documents/HaltH-Code/halth-ui/packages/ui/src/components/dropdown/Dropdown.tsx' unresolved ("." is not exported under the conditions ["storybook", "stories", "test", "module", "browser", "development|production"] from package /Users/brendan/Documents/HaltH-Code/halth-ui/packages/ui/node_modules/@halth/design-system-tokens (see exports field in /Users/brendan/Documents/HaltH-Code/halth-ui/packages/ui/node_modules/@halth/design-system-tokens/package.json))
+[13:29:23.085] [DEBUG] Could not resolve @halth/design-system-tokens from /Users/brendan/Documents/HaltH-Code/halth-ui/packages/ui/src/components/dropdown/Dropdown.tsx
+[13:29:23.096] [DEBUG] Change detection graph built: 22 stories, 54 deps tracked, 91ms
