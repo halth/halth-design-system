@@ -1,5 +1,12 @@
 # @halth/design-system
 
+## 0.2.1
+
+### Patch Changes
+
+- Selected avatars: the photo or initials now sit flush against the 2px border.
+- @halth/design-system-tokens@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
