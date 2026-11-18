@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Typography } from './Typography';
 
-const variants = ['h1', 'h2', 'h3', 'h4', 'subtitle', 'body', 'bodySmall', 'caption'] as const;
+const variants = ['display', 'h1', 'h2', 'h3', 'h4', 'subtitle', 'body', 'bodySmall', 'caption'] as const;
 const tones = ['default', 'mutedGray', 'brand', 'secondaryBrand', 'success', 'danger', 'warning'] as const;
 
 const meta = {
@@ -29,6 +29,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Display: Story = {
+  args: { variant: 'display', as: 'h1', tone: 'brand', children: 'Making health easy' },
+};
 export const H1: Story = { args: { variant: 'h1', as: 'h1', children: 'Good morning, Jordan' } };
 export const H2: Story = { args: { variant: 'h2', as: 'h2', children: 'Today’s bookings' } };
 export const H3: Story = { args: { variant: 'h3', as: 'h3', children: 'Client profile' } };

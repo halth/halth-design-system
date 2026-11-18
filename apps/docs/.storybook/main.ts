@@ -8,6 +8,8 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/**/*.stories.@(ts|tsx)',
   ],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
+  // Brand assets (logos, marks, illustrations) served at ./brand/… for the Brand assets page.
+  staticDirs: ['../public'],
   framework: '@storybook/react-vite',
   async viteFinal(viteConfig) {
     viteConfig.plugins = [...(viteConfig.plugins ?? []), tailwindcss()];

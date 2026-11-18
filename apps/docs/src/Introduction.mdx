@@ -1,37 +1,77 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+
+import { buttonVariants } from '../../../packages/ui/src/components/button';
+import { BrandPage, CodeBlock, Hero, Section, Topic } from './BrandPage';
 
 <Meta title="Introduction" />
 
-# HaltH Design System
+<Unstyled>
+<BrandPage>
 
-The HaltH Design System is the shared component library used across HaltH products. See **Guidelines** for the design concepts and rules (when to use what), and **Design System** for every colour, type style and component on one page.
+<Hero
+  eyebrow="Introduction"
+  title="Build with the Fascia"
+  highlight="design system"
+  description="The shared component library used across HaltH products. Guidelines covers what to use, where and why; Design System shows every logo, colour, type style and component on one page."
+  links={[
+    { href: '#packages', label: 'Packages' },
+    { href: '#install', label: 'Install' },
+    { href: '#set-up', label: 'Set up' },
+    { href: '#usage', label: 'Usage' },
+  ]}
+  copyValue="npm install @halth/design-system @halth/design-system-tokens"
+  copyLabel="Copy install command"
+/>
 
-- **`@halth/design-system`:** React components built on HeroUI v3 (Button, Card, …)
-- **`@halth/design-system-tokens`:** Colours, radius, fonts, Tailwind v4 / HeroUI v3 themes and Tailwind v3 / NativeWind presets
+<Section id="packages" title="Packages" description="Two packages, published to GitHub Packages. Apps import components from @halth/design-system and never build their own versions.">
+  <div className="grid gap-6 md:grid-cols-2">
+    <Topic title="@halth/design-system">
 
-## Install
+React components built on HeroUI v3: `Button`, `Card`, `Typography`, `Modal` and the rest. Each has its own subpath, e.g. `@halth/design-system/button`.
 
-```bash
-# .npmrc
-@halth:registry=https://npm.pkg.github.com
+    </Topic>
+    <Topic title="@halth/design-system-tokens">
 
-npm install @halth/design-system @halth/design-system-tokens
-```
+Colours, radius, fonts and the type scale, as Tailwind v4 and HeroUI v3 themes, plus Tailwind v3 and NativeWind presets for older and mobile apps.
 
-## Tailwind v4 + HeroUI v3
+    </Topic>
+  </div>
+</Section>
 
-```css
-/* globals.css */
-@import 'tailwindcss';
-@import '@heroui/styles';
-@import '@halth/design-system-tokens/heroui.css';
-@source '../node_modules/@halth/design-system/dist';
-```
+<Section id="install" surface="tint" title="Install" description="Point the @halth scope at GitHub Packages, then install both packages.">
+  <CodeBlock code={'# .npmrc\n@halth:registry=https://npm.pkg.github.com'} copyLabel="Copy .npmrc" />
+  <CodeBlock code="npm install @halth/design-system @halth/design-system-tokens" copyLabel="Copy install command" />
+</Section>
 
-## Usage
+<Section id="set-up" title="Set up Tailwind v4 and HeroUI v3" description="Import the HaltH theme after HeroUI's styles, and let Tailwind scan the components for their classes.">
+  <CodeBlock
+    code={"/* globals.css */\n@import 'tailwindcss';\n@import '@heroui/styles';\n@import '@halth/design-system-tokens/heroui.css';\n@source '../node_modules/@halth/design-system/dist';"}
+    copyLabel="Copy CSS"
+  />
+</Section>
 
-```tsx
-import { Button } from '@halth/design-system/button';
+<Section id="usage" surface="tint" title="Usage" description="Import each component from its own subpath. Events use onPress, and boolean props start with is, matching HeroUI.">
+  <CodeBlock
+    code={"import { Button } from '@halth/design-system/button';\n\n<Button variant=\"outline\" onPress={save}>Save</Button>"}
+    copyLabel="Copy example"
+  />
+</Section>
 
-<Button variant="outline" onPress={save}>Save</Button>
-```
+<Section
+  id="where-next"
+  surface="forest"
+  title="Where next"
+  description="Read the guidelines before building a screen, and use the Design System page to find a logo, colour or component."
+>
+  <div className="flex flex-wrap gap-4">
+    <a href="./?path=/docs/guidelines--docs" target="_top" className={buttonVariants({ variant: 'secondary', size: 'lg' })}>
+      Read the guidelines
+    </a>
+    <a href="./?path=/docs/design-system--docs" target="_top" className={buttonVariants({ variant: 'ghost', size: 'lg', className: 'text-white hover:text-secondary-foreground' })}>
+      Open the design system
+    </a>
+  </div>
+</Section>
+
+</BrandPage>
+</Unstyled>

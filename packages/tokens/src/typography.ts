@@ -8,10 +8,20 @@ export interface TypeStyle {
 
 /**
  * The HaltH type scale. Each style becomes a Tailwind class named after it
- * (`text-h1` … `text-caption`, with `bodySmall` as `text-body-small`) that
+ * (`text-display`, `text-h1` … `text-caption`, with `bodySmall` as `text-body-small`) that
  * sets size, line height, letter spacing and default weight together.
  */
 export const typeScale = {
+  /**
+   * Brand display: hero titles on marketing and docs pages. Light, and fluid from
+   * 48px on phones to 72px on wide screens, as on halth.com/brand.
+   */
+  display: {
+    fontSize: 'clamp(3rem, 2rem + 4vw, 4.5rem)',
+    lineHeight: '1.05',
+    letterSpacing: '-0.025em',
+    fontWeight: '300',
+  },
   h1: { fontSize: '2.25rem', lineHeight: '1.25', letterSpacing: '-0.025em' },
   h2: { fontSize: '1.875rem', lineHeight: '1.25', letterSpacing: '-0.025em' },
   h3: { fontSize: '1.5rem', lineHeight: '1.375', letterSpacing: '-0.025em', fontWeight: '600' },

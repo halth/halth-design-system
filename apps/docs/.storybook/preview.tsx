@@ -20,7 +20,7 @@ const preview: Preview = {
     a11y: { test: 'error' },
     viewport: { options: viewports },
     options: {
-      storySort: { order: ['Introduction', 'Guidelines', 'Design System', 'Components'] },
+      storySort: { order: ['Design System', 'Introduction', 'Guidelines', 'Components'] },
     },
   },
 };
