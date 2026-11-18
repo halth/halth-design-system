@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Unstyled } from '@storybook/addon-docs/blocks';
 
 import * as AlertStories from '../../../packages/ui/src/components/alert/Alert.stories';
 import * as BookingCardStories from '../../../packages/ui/src/components/booking-card/BookingCard.stories';
@@ -7,17 +7,34 @@ import * as CardStories from '../../../packages/ui/src/components/card/Card.stor
 import * as ChipStories from '../../../packages/ui/src/components/chip/Chip.stories';
 import * as EmptyStateStories from '../../../packages/ui/src/components/empty-state/EmptyState.stories';
 import * as InputStories from '../../../packages/ui/src/components/input/Input.stories';
+import { BrandPage, Hero, Prose, Section, Topic } from './BrandPage';
+import { IconGroups, IconSizes } from './IconGuide';
 import { RadiusScale } from './Foundations';
 
 <Meta title="Guidelines" />
 
-# Design guidelines
+<Unstyled>
+<BrandPage>
 
-What the HaltH Design System uses, where to use it and why. Everything on this page is built into the tokens and components. **Design System** shows them all.
+<Hero
+  eyebrow="Guidelines"
+  title="Design"
+  highlight="guidelines"
+  description="What Fascia, the HaltH design system, uses, where to use it and why. Everything here is built into the tokens and components, and the Design System page shows them all."
+  links={[
+    { href: '#design-language', label: 'Design language' },
+    { href: '#colour', label: 'Colour' },
+    { href: '#typography', label: 'Typography' },
+    { href: '#spacing', label: 'Spacing' },
+    { href: '#states', label: 'States' },
+    { href: '#components', label: 'Components' },
+    { href: '#accessibility', label: 'Accessibility' }
+  ]}
+/>
 
-## Design language
+<Section id="design-language" surface="stone" title="Design language">
 
-### Corner radius
+<Topic title="Corner radius">
 
 <RadiusScale />
 
@@ -29,7 +46,9 @@ Radii are tokens in `@halth/design-system-tokens` (`radii`), named by role so ch
 - **`rounded-full`:** circles (the live dot and the verified badge). A circle is geometry, not a design choice, so it has no token.
 - **Square bottom corners:** the modal on mobile (`rounded-b-none`, then `sm:rounded-b-container`), because it sits on the bottom edge of the screen as a sheet.
 
-### Borders
+</Topic>
+
+<Topic title="Borders">
 
 All borders are 1px.
 
@@ -40,37 +59,34 @@ All borders are 1px.
 
 Cards on the page have no border. They stand out because they are white on `stone-100`. The only bordered card is `outline`, for white cards on a white surface.
 
-### Elevation
+</Topic>
+
+<Topic title="Elevation">
 
 - **No shadows.** `Modal` and the `Tabs` indicator turn off HeroUI's shadows (`shadow-none`), and `@halth/design-system-tokens` sets HeroUI's `--field-shadow` to transparent so fields, checkboxes and switches are flat. Layers are shown by colour instead, which keeps screens flat and calm.
 - **Blurred backdrop** behind modals by default, so the task in front stands out. Use `backdrop="opaque"` where blur is too heavy, e.g. in embeds.
 
-### Icons
+</Topic>
+
+<Topic title="Icons">
 
 `@halth/design-system/icons` re-exports Lucide (`lucide-react`) under HaltH names: a 24px grid, a 2px round stroke and `currentColor`, so icons always match their text. There is one icon per job, so don't import Lucide directly. The full set is in **Components → Icons**.
 
-- **Status and feedback:** `CheckIcon` (paid, verified), `CircleCheckIcon`, `CircleXIcon`, `AlertCircleIcon` (errors), `AlertTriangleIcon` (warnings), `InfoIcon`, `HelpCircleIcon`, `ClockIcon` (awaiting payment), `BanIcon`, `BadgeCheckIcon`, `ShieldCheckIcon`, `ShieldIcon`, `LockIcon`.
-- **Actions:** `PlusIcon` (add), `MinusIcon`, `XIcon` (remove or dismiss), `PencilIcon` (edit), `Trash2Icon` (delete), `DeleteIcon` (backspace), `CopyIcon`, `ShareIcon`, `PaperPlaneIcon` (invite and send), `DownloadIcon`, `UploadIcon`, `PrinterIcon`, `SearchIcon`, `RotateCcwIcon`, `RepeatIcon`, `PauseIcon`, `EllipsisVerticalIcon` (more options), `GripVerticalIcon` (drag), `MenuIcon`.
-- **Navigation:** `ChevronLeftIcon`, `ChevronRightIcon` (opens something), `ChevronDownIcon`, `ChevronUpDownIcon`, `ArrowLeftIcon`, `ArrowLeftRightIcon`, `ExternalLinkIcon`, `LinkIcon`.
-- **People and places:** `UserIcon` (a person without a photo), `UsersIcon`, `UserXIcon`, `Building2Icon`, `HospitalIcon`, `StethoscopeIcon`, `HeartPulseIcon`, `HardHatIcon`, `AwardIcon`, `MapPinIcon`, `MapPinOffIcon`, `GlobeIcon`.
-- **Payments:** `CreditCardIcon` (payment card, and the card logo fallback), `BanknoteIcon`, `BanknoteArrowUpIcon` (funding available), `WalletIcon`, `NfcIcon` (tap to pay), `QrCodeIcon`, `PercentIcon`, `TagIcon`, `TicketIcon`.
-- **Communication:** `MailIcon`, `PhoneIcon`, `SmartphoneIcon`, `MessageSquareIcon`, `BellIcon`, `MegaphoneIcon`.
-- **Content and settings:** `CalendarIcon` (bookings), `FileTextIcon`, `ClipboardListIcon`, `ImageIcon`, `VideoIcon`, `CameraIcon`, `SettingsIcon`, `KeyRoundIcon`, `PlugIcon`, `PuzzleIcon`, `ZapIcon`, `SparklesIcon`.
+<IconGroups />
 
 Brand logos (Apple, Google Play, Google) aren't icons and aren't in the set.
 
-Icon sizes are tokens (`iconSizes`), used as `size-(--icon-*)`:
+#### Sizes
 
-- **`--icon-xs` (12px):** the avatar verified badge.
-- **`--icon-sm` (14px):** chips and attribute chips.
-- **`--icon-md` (16px):** next to text, the dropdown chevron, the card logo fallback, icons inside an `Input` and the small `Spinner`.
-- **`--icon-lg` (20px):** the modal close button and the `Alert` icon.
-- **`--icon-xl` (24px):** buttons, the card chevron, the `Spinner` and `EmptyState` icons.
-- **`--icon-2xl` (32px):** the large `Spinner`, and `EmptyState` icons from `sm` up.
+Icon sizes are tokens (`iconSizes`), used as `size-(--icon-*)`.
+
+<IconSizes />
 
 Icons are `aria-hidden`; the control around them carries the label.
 
-### Sizing
+</Topic>
+
+<Topic title="Sizing">
 
 Control heights, so things in a row line up:
 
@@ -82,7 +98,9 @@ Control heights, so things in a row line up:
 
 Avatars come in 32, 40, 56, 64 and 88px (`xs`–`xl`).
 
-### Motion
+</Topic>
+
+<Topic title="Motion">
 
 Durations and easings are tokens: CSS variables for Tailwind (`duration-(--duration-fast)`, `ease-standard`) and JS values for Motion/framer-motion (`transitions.base` from `@halth/design-system-tokens`).
 
@@ -91,16 +109,22 @@ Durations and easings are tokens: CSS variables for Tailwind (`duration-(--durat
 - **Live dot:** a ping on `BookingCard` marks an appointment that is happening now.
 - **Skeleton:** `animate-pulse` while content loads.
 
-## Colour
+</Topic>
 
-### Surfaces
+</Section>
+
+<Section id="colour" surface="tint" title="Colour">
+
+<Topic title="Surfaces">
 
 - **White (`bg-card`, `bg-background`):** cards, modals and fields.
 - **`bg-stone-100`:** the page behind cards. The stories use it so white cards stand out.
 - **`bg-secondary`:** secondary buttons, the muted tab track, disabled buttons and skeletons. It is a quiet grey for things that sit back.
 - **`bg-primary`:** primary buttons, the selected tab and the verified badge. This is the brand green, so it marks the main action and identity.
 
-### Text
+</Topic>
+
+<Topic title="Text">
 
 Set text colour with the `Typography` `tone` prop:
 
@@ -111,7 +135,9 @@ Set text colour with the `Typography` `tone` prop:
 - **`success` / `danger` / `warning`:** status messages. `warning` uses `sun-600`, the same amber as the warning `Chip`.
 - **`white`:** text on `bg-primary`.
 
-### Status
+</Topic>
+
+<Topic title="Status">
 
 `Chip` tones and the colours behind them:
 
@@ -123,7 +149,9 @@ Set text colour with the `Typography` `tone` prop:
 
 `bg-highlight` (light green) is used only for the live dot.
 
-### Hover and press
+</Topic>
+
+<Topic title="Hover and press">
 
 Interactive things tint toward the brand green, so feedback looks the same everywhere:
 
@@ -133,14 +161,21 @@ Interactive things tint toward the brand green, so feedback looks the same every
 - **Outline and ghost buttons:** `secondary` grey on hover.
 - **Buttons don't animate on press:** no ripple and no shrink. Only the colour changes.
 
-## Typography
+</Topic>
+
+</Section>
+
+<Section id="typography" surface="stone" title="Typography">
+
+<Topic>
 
 **Helvetica Neue** is the only font, set by `--font-sans` in `@halth/design-system-tokens`. Each app loads the font files itself (see `platform-business-web` `layout.tsx`). Where an app doesn't define `--font-helvetica-neue`, the token falls back to `"Helvetica Neue"`. Storybook uses the same stack for its own UI and docs pages (`.storybook/theme.ts`), and `src/styles.css` applies it to inline code, colour swatch labels and props tables. Only multi-line code samples stay monospace.
 
-The type scale lives in `@halth/design-system-tokens` (`typeScale`) and becomes Tailwind classes, `text-h1` to `text-caption` (`bodySmall` is `text-body-small`). Each class sets size, line height, letter spacing and default weight, so a style is the same everywhere it's used.
+The type scale lives in `@halth/design-system-tokens` (`typeScale`) and becomes Tailwind classes, `text-display` and `text-h1` to `text-caption` (`bodySmall` is `text-body-small`). Each class sets size, line height, letter spacing and default weight, so a style is the same everywhere it's used.
 
 Use `Typography` for all text. Inside components, where the text sits in another element (a HeroUI button, chip or tab), use `typographyVariants()`. Every `@halth/design-system` component builds its text this way, so changing the scale in tokens changes the whole library.
 
+- **`display`:** light, fluid from 48px on phones to 72px on wide screens: the brand display style from halth.com/brand. Hero titles on marketing and docs pages only, not in app screens.
 - **`h1`–`h4`:** page, section, card and group titles.
 - **`subtitle`:** a client's name on `BookingCard`.
 - **`body`:** default text and modal body.
@@ -157,25 +192,41 @@ Where components use the scale:
 - **`Dropdown`:** value and placeholder in `body`.
 - **`Avatar` initials:** `caption` (`xs`) up to `h3` (`xl`), always regular.
 
-Weights: `regular` by default (including avatar initials), `medium` for names, tabs and emphasis, and `semibold` for `h3`/`h4` and chip labels. Choose the element for meaning and the variant for looks, e.g. `<Typography as="h3" variant="subtitle">`.
+Weights: `light` for `display`, `regular` by default (including avatar initials), `medium` for names, tabs and emphasis, and `semibold` for `h3`/`h4` and chip labels. Choose the element for meaning and the variant for looks, e.g. `<Typography as="h3" variant="subtitle">`.
 
-## Spacing
+</Topic>
+
+</Section>
+
+<Section id="spacing" surface="tint" title="Spacing">
+
+<Topic>
 
 - **`p-4` on mobile, `p-5` from `sm` up:** padding inside section cards and `BookingCard`. It gives more room on bigger screens. Modal sections use `p-4`.
 - **`gap-1`–`gap-2`:** between related items, such as an icon and its label or a row of chips.
 - **`gap-4`:** between groups, such as an avatar and the name block.
 - **The `sm` breakpoint (640px):** where `BookingCard` goes from stacked to side by side, tabs stop stretching full width and the modal changes from a bottom sheet to centred.
 
-## States
+</Topic>
+
+</Section>
+
+<Section id="states" surface="stone" title="States">
+
+<Topic>
 
 - **Disabled:** `bg-secondary` with `text-muted-foreground` and no opacity, so the label stays readable.
 - **Loading:** `Button isPending` shows a spinner and keeps its width. A page or section that's loading shows a `Spinner`. Lists use `Skeleton`s in the same layout as the content, like `BookingCardSkeleton`, so the page doesn't jump when data arrives.
 - **Invalid:** a red border on the field, and the `errorMessage` in red under it in place of the description.
 - **Focus:** a visible ring, from HeroUI or `focus-visible:ring-2 ring-ring`. A pressable card also takes its hover tint, so keyboard users see the same highlight as mouse users.
 
-## Components
+</Topic>
 
-### Button
+</Section>
+
+<Section id="components" surface="tint" title="Components">
+
+<Topic title="Button">
 
 <Canvas of={ButtonStories.AllVariants} />
 
@@ -189,17 +240,23 @@ Weights: `regular` by default (including avatar initials), `medium` for names, t
 
 Sizes: `md` by default, `lg` for the main action on mobile, `sm` in dense rows, and `xs` inside compact rows like attribute chips.
 
-### Chip
+</Topic>
+
+<Topic title="Chip">
 
 <Canvas of={ChipStories.AllTones} />
 
 Chips show status and are not pressable. Each one has a label, and an icon only when the icon adds meaning: a check on Paid, a clock on Awaiting payment.
 
-### AttributeChip
+</Topic>
+
+<Topic title="AttributeChip">
 
 A fixed-size pill for a logo or icon, with a tooltip that names it. Use it for wallet and funding details on a card: payment card, health fund, Medicare, funding available and add card. Pass `onPress` to make it a button.
 
-### CardLogo
+</Topic>
+
+<Topic title="CardLogo">
 
 The logo inside an `AttributeChip`. By default it loads from the HaltH CDN (`CARD_LOGO_BASE_URL`, `https://static.halth.com/assets/logo`) as `<baseUrl>/<folder>/<brand>.png`, so pass the API values straight through: `paymentMethod.brand` or `healthFundCard.healthFundId`. A new brand only needs its PNG uploaded to the CDN, named exactly as the API sends it.
 
@@ -208,7 +265,9 @@ The logo inside an `AttributeChip`. By default it loads from the HaltH CDN (`CAR
 
 If the image fails to load, or there is no brand or `src`, it shows `CreditCardIcon`.
 
-### Card
+</Topic>
+
+<Topic title="Card">
 
 <Canvas of={CardStories.AllVariants} />
 
@@ -266,17 +325,23 @@ Read-only cards have no hover or focus state.
 
 If a card needs more than a section or a row, such as several regions, a status that the component maps to a `Chip`, or rows of attribute chips, it becomes its own component named after its job, like `BookingCard`. It reuses `Card`'s surface and pressable states inside `@halth/design-system`, takes display props (never API types) and lives in its own folder with stories and tests. Apps don't build their own complex cards out of `Card` and `className`.
 
-### BookingCard
+</Topic>
+
+<Topic title="BookingCard">
 
 <Canvas of={BookingCardStories.List} />
 
 A booking in the calendar, with its own two-column layout and the same pressable states as `Card`. It takes display props, so the app maps its `Booking` data first. Its whole surface is a stretched `<button>` placed beside the inner buttons rather than around them, so the inner buttons keep working without nesting.
 
-### Modal
+</Topic>
+
+<Topic title="Modal">
 
 For focused tasks and confirmations. On mobile it is a bottom sheet so it's easy to reach with a thumb. From `sm` up it is centred. Footer actions sit on the right.
 
-### Tabs
+</Topic>
+
+<Topic title="Tabs">
 
 A pill segmented control for switching between views of the same content.
 
@@ -285,7 +350,9 @@ A pill segmented control for switching between views of the same content.
 
 On mobile the tabs stretch to full width; from `sm` up each tab is 192px wide (`w-48`). With `fullWidth` the track fills its container and the tabs share it equally at every size.
 
-### Avatar
+</Topic>
+
+<Topic title="Avatar">
 
 People's photos, with initials as the fallback. Always a rounded square (`rounded-tile`), never a circle, so people and organisations look the same everywhere. Use `fallback` for an icon, e.g. for organisations.
 
@@ -293,11 +360,15 @@ In a picker (e.g. choosing a provider), set `isSelected`. Selected avatars get a
 
 `className` is for placement only (margin, flex or grid placement), as with `Card`. If an app needs the avatar to look different, add a prop here rather than restyling it with `className`.
 
-### Dropdown
+</Topic>
+
+<Topic title="Dropdown">
 
 The trigger for a select-style field, with a chevron that rotates when open. Needs `framer-motion`.
 
-### Alert
+</Topic>
+
+<Topic title="Alert">
 
 <Canvas of={AlertStories.AllVariants} />
 
@@ -308,20 +379,28 @@ A notice inside a page or form, not a toast. It has a title, an optional sentenc
 - **`warning`:** needs attention but nothing is broken, such as a locked claim. Text is `sun-800`, because `sun-600` fails contrast.
 - **`danger`:** something failed, such as a declined card.
 
-### Badge
+</Topic>
+
+<Topic title="Badge">
 
 A count on the top-right corner of an `Avatar` or `Button`, such as unread notifications. It's hidden at 0, shows "99+" above 99, and needs a `label` for screen readers ("3 unread notifications"). Statuses are `Chip`s, not badges.
 
-### Checkbox and Switch
+</Topic>
+
+<Topic title="Checkbox and Switch">
 
 - **`Checkbox`:** a choice saved with a form, such as accepting terms or sending reminders. The label and the box both toggle it. Add `description` for help text and `errorMessage` with `isInvalid`.
 - **`Switch`:** a setting that takes effect straight away, such as turning online bookings on.
 
-### CopyButton
+</Topic>
+
+<Topic title="CopyButton">
 
 A `Button` that copies `value`, such as a booking link or reference, and shows a check and "Copied" for two seconds. Name it after what it copies ("Copy link"). It's `secondary` and `sm` by default. Pass `onError` to tell people when the browser blocks the clipboard.
 
-### EmptyState
+</Topic>
+
+<Topic title="EmptyState">
 
 <Canvas of={EmptyStateStories.AllVariants} />
 
@@ -334,7 +413,9 @@ The only empty state, in every app, whenever a page, section or list has nothing
 
 Use it as the only content of a white `Card`. Inside a table or list, such as a search with no results, use `isCompact`.
 
-### Input
+</Topic>
+
+<Topic title="Input">
 
 <Canvas of={InputStories.AllVariants} />
 
@@ -345,16 +426,26 @@ Every text field: a label above, the field, then help text or an error. Fields a
 - **`startContent`:** an icon or prefix, such as `MailIcon` or "$".
 - No visible label? Pass `aria-label`.
 
-### Skeleton and Spinner
+</Topic>
+
+<Topic title="Skeleton and Spinner">
 
 - **`Skeleton`:** a grey placeholder. Build a loading list from `bar`s and `tile`s in the same layout as the content.
 - **`Spinner`:** a page or section that's loading, in brand green with a `label` such as "Loading bookings". Buttons use `isPending` instead.
 
-### Tooltip
+</Topic>
+
+<Topic title="Tooltip">
 
 A short label on hover and keyboard focus, such as naming an icon-only button. Wrap content that isn't a button in `TooltipTrigger` so keyboard users can reach it. Never put anything people need to press inside a tooltip.
 
-## Accessibility
+</Topic>
+
+</Section>
+
+<Section id="accessibility" surface="stone" title="Accessibility">
+
+<Topic>
 
 - Text meets 4.5:1 contrast, except warning amber (`sun-600`: the warning `Chip` and Typography `tone="warning"`). That's why charcoal is used on grey, and why `Alert` warning text is `sun-800`.
 - Controls meet 3:1 against white: the empty `Checkbox` box and the off `Switch` track use the muted grey, not HeroUI's light field border.
@@ -362,3 +453,10 @@ A short label on hover and keyboard focus, such as naming an icon-only button. W
 - Icon-only controls have an `aria-label`, as on `AttributeChip`.
 - Interactive elements are never nested. The pressable `BookingCard` uses a stretched button beside its inner buttons.
 - Every story runs the a11y addon.
+
+</Topic>
+
+</Section>
+
+</BrandPage>
+</Unstyled>

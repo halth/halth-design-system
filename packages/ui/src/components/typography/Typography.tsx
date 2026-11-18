@@ -4,6 +4,7 @@ import { cn } from '../../lib/cn';
 
 /** The `@halth/design-system-tokens` type scale: each class sets size, line height, letter spacing and default weight. */
 const VARIANTS = {
+  display: 'text-display',
   h1: 'text-h1',
   h2: 'text-h2',
   h3: 'text-h3',

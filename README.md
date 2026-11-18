@@ -1,14 +1,14 @@
-# HaltH Design System
+# Fascia Design System
 
-The HaltH Design System is the shared component library and design tokens for HaltH products.
+Fascia is the HaltH design system: the shared component library and design tokens for HaltH products.
 
-**Storybook:** https://ideal-succotash-1gwzw4v.pages.github.io shows every component, the design guidelines and the icons. It's private: sign in to GitHub with access to this repo. It redeploys automatically on every merge to `main`.
+**Storybook:** https://fascia.halth.com (also at https://ideal-succotash-1gwzw4v.pages.github.io) shows every component, the design guidelines and the icons. It's private: sign in to GitHub with access to this repo. It redeploys automatically on every merge to `main`.
 
 | Package | Description |
 |---|---|
 | [`@halth/design-system-tokens`](packages/tokens) | Colours, radius, fonts. Tailwind v4 `theme.css`, HeroUI v3 `heroui.css`, Tailwind v3 and NativeWind presets |
 | [`@halth/design-system`](packages/ui) | React components built on HeroUI v3 and Tailwind CSS v4 |
-| [`apps/docs`](apps/docs) | Storybook showcase, hosted at https://ideal-succotash-1gwzw4v.pages.github.io |
+| [`apps/docs`](apps/docs) | Storybook showcase, hosted at https://fascia.halth.com (also https://ideal-succotash-1gwzw4v.pages.github.io) |
 
 ## Develop
 

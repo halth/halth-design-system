@@ -1,7 +1,8 @@
 import { brand, fontFamily, primary, semanticValues, stone } from '@halth/design-system-tokens';
 import { create } from 'storybook/theming';
 
-const LOGO_URL = 'https://static.halth.com/assets/logo/app-icon-green.png';
+/** White logomark from the brand assets (`public/brand`), for the forest sidebar. */
+const LOGO_URL = './brand/logos/halth-logomark-white.svg';
 
 const foreground = `hsl(${semanticValues.foreground})`;
 
@@ -39,8 +40,9 @@ export const theme = create({
   inputBorder: stone[200],
   inputTextColor: foreground,
 
-  // `brandImage: null` makes Storybook render `brandTitle` as HTML, so the logo and "Design System" sit side by side.
+  // `brandImage: null` makes Storybook render `brandTitle` as HTML, so the logo and "Fascia Design System" sit side by side.
+  // White because the title sits on the forest sidebar (sidebar.ts).
   brandImage: null,
-  brandTitle: `<span style="display:inline-flex;align-items:center;gap:8px;color:${primary.DEFAULT};font-size:18px;font-weight:600"><img src="${LOGO_URL}" alt="HaltH" height="24" />Design System</span>`,
+  brandTitle: `<span style="display:inline-flex;align-items:center;gap:8px;color:white;font-size:18px;font-weight:600"><img src="${LOGO_URL}" alt="HaltH" height="24" />Fascia Design System</span>`,
   brandUrl: './',
 });

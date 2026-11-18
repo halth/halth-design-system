@@ -8,6 +8,60 @@ body {
   @apply bg-background text-foreground font-sans;
 }
 
+/* Brand pages (BrandPage.tsx) draw their own full-width sections, so drop the docs column's padding and width. */
+.sbdocs-wrapper:has(.brand-page) {
+  padding: 0;
+}
+
+.sbdocs-content:has(.brand-page) {
+  max-width: none;
+}
+
+/* Markdown on brand pages (`Prose`, `Topic`): brand type and forest text, like halth.com/brand. */
+.brand-prose {
+  @apply flex max-w-none flex-col gap-4 text-body text-primary-600;
+}
+
+.brand-prose h4 {
+  @apply mt-2 text-subtitle font-normal text-primary;
+}
+
+.brand-prose strong {
+  @apply font-medium text-primary;
+}
+
+.brand-prose ul,
+.brand-prose ol {
+  @apply flex flex-col gap-2 pl-5 marker:text-primary-300;
+}
+
+.brand-prose ul {
+  @apply list-disc;
+}
+
+.brand-prose ol {
+  @apply list-decimal;
+}
+
+.brand-prose code {
+  @apply rounded-pill bg-primary-50 px-2 py-0.5 text-body-small text-primary;
+}
+
+.brand-prose a {
+  @apply text-primary underline underline-offset-4;
+}
+
+/* Story previews inside a component block or guideline sit on stone, without Storybook's border and shadow. */
+.brand-prose .sbdocs-preview,
+.brand-canvas > * {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: var(--radius-tile) !important;
+  box-shadow: none !important;
+  background: var(--color-stone-50) !important;
+  overflow: hidden;
+}
+
 /* Token names, swatch labels and props tables use the HaltH font; code samples (`pre`) stay monospace. */
 .sbdocs code,
 .sbdocs .docblock-colorpalette *,

@@ -1,5 +1,4 @@
-import { Canvas, ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks';
-import { palette } from '@halth/design-system-tokens';
+import { Canvas, Meta, Unstyled } from '@storybook/addon-docs/blocks';
 
 import * as AttributeChipStories from '../../../packages/ui/src/components/attribute-chip/AttributeChip.stories';
 import * as AvatarStories from '../../../packages/ui/src/components/avatar/Avatar.stories';
@@ -12,121 +11,169 @@ import * as IconsStories from '../../../packages/ui/src/components/icons/Icons.s
 import * as ModalStories from '../../../packages/ui/src/components/modal/Modal.stories';
 import * as TabsStories from '../../../packages/ui/src/components/tabs/Tabs.stories';
 import * as TypographyStories from '../../../packages/ui/src/components/typography/Typography.stories';
-import { RadiusScale, SemanticColors } from './Foundations';
-
-export const scales = Object.entries(palette).filter(([, value]) => typeof value !== 'string');
-export const brandColors = Object.fromEntries(
-  Object.entries(palette).filter(([, value]) => typeof value === 'string')
-);
+import { Typography } from '../../../packages/ui/src/components/typography';
+import { AssetSection } from './BrandAssets';
+import { BrandPage, ComponentBlock, Group, Hero, Section } from './BrandPage';
+import { CoreColors, PaletteScales, RadiusScale, SemanticColors, TypeSpecimens } from './Foundations';
 
 <Meta title="Design System" />
 
-# HaltH Design System
+<Unstyled>
+<BrandPage>
 
-Every HaltH foundation and component on one page. Colours come straight from `@halth/design-system-tokens` and the components below are their live stories, so this page updates as soon as the library does.
+<Hero
+  eyebrow="Design system"
+  title="Fascia"
+  highlight="design system"
+  description="The HaltH brand and every foundation and component on one page. Logos and images download from here, colours come straight from @halth/design-system-tokens and the components are their live stories."
+  links={[
+    { href: '#logos', label: 'Logos' },
+    { href: '#imagery', label: 'Illustrations and photography' },
+    { href: '#colours', label: 'Colours' },
+    { href: '#typography', label: 'Typography' },
+    { href: '#shape', label: 'Shape and icons' },
+    { href: '#connections', label: 'Connections' },
+    { href: '#components', label: 'Components' },
+  ]}
+  copyValue="npm install @halth/design-system @halth/design-system-tokens"
+  copyLabel="Copy install command"
+  showSwatches
+/>
 
-## Colours
+<AssetSection group="logos" />
 
-### Semantic
+<AssetSection group="imagery" surface="tint" />
 
-Use these class names in app code (`bg-primary`, `bg-secondary`, `text-muted-foreground`). In HeroUI apps, `bg-accent` is the brand colour and `text-muted` is secondary text.
+<Section
+  id="colours"
+  title="Colours"
+  description="Primary carries the brand, deep forest grounds it, sun highlights it and stone gives it air. Copy a class name from any swatch. New colours go in packages/tokens/src/colors.ts."
+>
+  <Group title="Core palette">
+    <CoreColors />
+  </Group>
+  <Group title="Semantic">
+    <Typography tone="brand" className="-mt-2 max-w-3xl text-primary-600">
+      {'Use these class names in app code (bg-primary, bg-secondary, text-muted-foreground). In HeroUI apps, bg-accent is the brand colour and text-muted is secondary text.'}
+    </Typography>
+    <SemanticColors />
+  </Group>
+  <Group title="Scales">
+    <PaletteScales />
+  </Group>
+</Section>
 
-<SemanticColors />
+<Section
+  id="typography"
+  surface="tint"
+  title="Typography"
+  description="HaltH uses Helvetica Neue throughout. Use Typography for every heading, paragraph and label: variant sets the scale and tone the colour."
+>
+  <TypeSpecimens />
+  <Group title="Tones">
+    <ComponentBlock name="Typography" importPath="@halth/design-system/typography">
+      <Canvas of={TypographyStories.Tones} />
+    </ComponentBlock>
+  </Group>
+</Section>
 
-### Palette
+<Section
+  id="shape"
+  title="Shape and icons"
+  description="Four radii and one icon set. Pills for anything you press, containers for surfaces, tiles for avatars. Icons use currentColor; size them with size-(--icon-*)."
+>
+  <Group title="Radius">
+    <RadiusScale />
+  </Group>
+  <Group title="Icons">
+    <ComponentBlock name="Icons" importPath="@halth/design-system/icons" exports="CalendarIcon">
+      <Canvas of={IconsStories.AllIcons} />
+    </ComponentBlock>
+  </Group>
+</Section>
 
-The full scales behind the semantic colours, e.g. `bg-primary-50` or `text-sun-600`. New colours go in `packages/tokens/src/colors.ts`.
+<AssetSection group="connections" surface="tint" />
 
-<ColorPalette>
-  {scales.map(([name, shades]) => (
-    <ColorItem
-      key={name}
-      title={name}
-      subtitle={`${name}-*`}
-      colors={Object.fromEntries(
-        Object.entries(shades).map(([shade, hex]) => [shade === 'DEFAULT' ? name : shade, hex])
-      )}
-    />
-  ))}
-  <ColorItem title="Brand" subtitle="bg-cream, bg-forestBg, …" colors={brandColors} />
-</ColorPalette>
+<Section
+  id="components"
+  title="Components"
+  description="One component per job. Each block shows the live stories, so what you see is what apps get."
+>
+  <ComponentBlock name="Button" importPath="@halth/design-system/button">
+    <Canvas of={ButtonStories.AllVariants} />
+    <Canvas of={ButtonStories.Sizes} />
+  </ComponentBlock>
+  <ComponentBlock name="Chip" importPath="@halth/design-system/chip">
+    <Canvas of={ChipStories.AllTones} />
+  </ComponentBlock>
+  <ComponentBlock
+    name="AttributeChip"
+    importPath="@halth/design-system/attribute-chip"
+    note="Logos come from @halth/design-system/card-logo."
+  >
+    <Canvas of={AttributeChipStories.AllAttributes} />
+  </ComponentBlock>
+  <ComponentBlock name="Avatar" importPath="@halth/design-system/avatar">
+    <Canvas of={AvatarStories.Sizes} />
+  </ComponentBlock>
+  <ComponentBlock
+    name="Card"
+    importPath="@halth/design-system/card"
+    exports="Card, CardHeader, CardTitle"
+    note="Two layouts (sections and rows) on two surfaces (white, outline). Padding, surface and row slots are fixed. See Guidelines → Card."
+  >
+    <Canvas of={CardStories.WithFooter} />
+    <Canvas of={CardStories.Row} />
+    <Canvas of={CardStories.Pressable} />
+  </ComponentBlock>
+  <ComponentBlock name="Dropdown" importPath="@halth/design-system/dropdown" note="Requires framer-motion.">
+    <Canvas of={DropdownStories.Interactive} />
+    <Canvas of={DropdownStories.Invalid} />
+  </ComponentBlock>
+  <ComponentBlock name="Tabs" importPath="@halth/design-system/tabs">
+    <Canvas of={TabsStories.WhiteTrack} />
+  </ComponentBlock>
+  <ComponentBlock name="Modal" importPath="@halth/design-system/modal">
+    <Canvas of={ModalStories.Default} />
+  </ComponentBlock>
+  <ComponentBlock name="BookingCard" importPath="@halth/design-system/booking-card">
+    <Canvas of={BookingCardStories.VerifiedMemberWithAttributes} />
+    <Canvas of={BookingCardStories.List} />
+  </ComponentBlock>
+</Section>
 
-## Typography
+<Section
+  id="what-fascia-represents"
+  surface="forest"
+  title="What Fascia represents"
+  description="In the body, fascia is the connective tissue that wraps every muscle and holds it all together. Fascia does the same for HaltH: one layer of tokens and components under every product, so each screen feels part of the same body."
+>
+  <div className="grid gap-10 md:grid-cols-3">
+    {[
+      {
+        title: 'One body',
+        text: 'Business, member, Extend, Embed and WellHealth Ops are built from the same components and tokens. No app builds its own version.',
+      },
+      {
+        title: 'One component per job',
+        text: 'There is one Button, one Card and one of everything else. When an app needs a new look, it becomes a variant of the existing component.',
+      },
+      {
+        title: 'Calm and accessible',
+        text: 'Flat surfaces, brand colour straight from the tokens, and text contrast checked on every story, so care feels clear for providers and clients alike.',
+      },
+    ].map(({ title, text }) => (
+      <div key={title} className="flex flex-col gap-3 border-t border-white/20 pt-6">
+        <Typography as="h3" variant="h3" weight="regular" tone="white">
+          {title}
+        </Typography>
+        <Typography variant="body" className="text-white/80">
+          {text}
+        </Typography>
+      </div>
+    ))}
+  </div>
+</Section>
 
-Use `Typography` for every heading, paragraph and label. `variant` sets the scale and `tone` the colour.
-
-<Canvas of={TypographyStories.AllVariants} />
-<Canvas of={TypographyStories.Tones} />
-
-## Radius
-
-<RadiusScale />
-
-## Icons
-
-`@halth/design-system/icons`. Icons use `currentColor`; size them with a class such as `size-4`.
-
-<Canvas of={IconsStories.AllIcons} />
-
-## Components
-
-### Button
-
-`@halth/design-system/button`
-
-<Canvas of={ButtonStories.AllVariants} />
-<Canvas of={ButtonStories.Sizes} />
-
-### Chip
-
-`@halth/design-system/chip`
-
-<Canvas of={ChipStories.AllTones} />
-
-### AttributeChip
-
-`@halth/design-system/attribute-chip`, with logos from `@halth/design-system/card-logo`
-
-<Canvas of={AttributeChipStories.AllAttributes} />
-
-### Avatar
-
-`@halth/design-system/avatar`
-
-<Canvas of={AvatarStories.Sizes} />
-
-### Card
-
-`@halth/design-system/card`
-
-<Canvas of={CardStories.WithFooter} />
-<Canvas of={CardStories.Row} />
-<Canvas of={CardStories.Pressable} />
-
-Two layouts (sections and rows) on two surfaces (`white`, `outline`). Padding, surface and row slots are fixed. See **Guidelines → Card**.
-
-### Dropdown
-
-`@halth/design-system/dropdown` (requires `framer-motion`)
-
-<Canvas of={DropdownStories.Interactive} />
-<Canvas of={DropdownStories.Invalid} />
-
-### Tabs
-
-`@halth/design-system/tabs`
-
-<Canvas of={TabsStories.WhiteTrack} />
-
-### Modal
-
-`@halth/design-system/modal`
-
-<Canvas of={ModalStories.Default} />
-
-### BookingCard
-
-`@halth/design-system/booking-card`
-
-<Canvas of={BookingCardStories.VerifiedMemberWithAttributes} />
-<Canvas of={BookingCardStories.List} />
+</BrandPage>
+</Unstyled>
