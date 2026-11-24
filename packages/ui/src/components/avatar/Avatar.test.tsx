@@ -44,19 +44,20 @@ describe('Avatar', () => {
 
   it('has no border or hover state unless it is selectable', () => {
     const { container } = render(<Avatar name="Jordan Lee" />);
-    expect(container.firstElementChild).not.toHaveClass('border-2');
+    expect(container.firstElementChild).not.toHaveClass('after:border-2');
     expect(screen.getByText('JL')).toHaveClass('bg-primary-200');
   });
 
-  it('shows a brand border when selected', () => {
+  it('shows a brand border over the photo when selected, so no gap shows between them', () => {
     const { container } = render(<Avatar name="Jordan Lee" isSelected />);
-    expect(container.firstElementChild).toHaveClass('border-2', 'border-primary');
+    expect(container.firstElementChild).toHaveClass('after:inset-0', 'after:border-2', 'after:border-primary');
+    expect(container.firstElementChild).not.toHaveClass('border-2');
     expect(screen.getByText('JL')).toHaveClass('bg-primary-100');
   });
 
   it('shows a grey fallback that darkens on hover when not selected', () => {
     const { container } = render(<Avatar name="Jordan Lee" isSelected={false} />);
-    expect(container.firstElementChild).toHaveClass('border-2', 'border-transparent', 'bg-transparent');
+    expect(container.firstElementChild).toHaveClass('after:border-2', 'after:border-transparent', 'bg-transparent');
     expect(screen.getByText('JL')).toHaveClass('bg-stone-50', 'group-hover:bg-stone-100');
   });
 });
