@@ -46,6 +46,13 @@ export function getInitials(name?: string) {
 
 const SELECTABLE_MOTION = 'transition-colors duration-(--duration-fast) ease-out';
 
+/**
+ * The selection border is drawn over the photo rather than around it: a border on the
+ * clipping element leaves a hairline of page background between it and the photo.
+ */
+const SELECTION_BORDER =
+  'after:absolute after:inset-0 after:rounded-[inherit] after:border-2 after:transition-colors after:duration-(--duration-fast) after:ease-out';
+
 /** The HaltH avatar: HeroUI v3 `Avatar` as a rounded square, with HaltH sizes and initials. */
 export function Avatar({
   src,
@@ -63,9 +70,9 @@ export function Avatar({
         SIZES[size],
         'overflow-hidden rounded-tile',
         isSelectable && [
-          'border-2 bg-transparent',
-          SELECTABLE_MOTION,
-          isSelected ? 'border-primary' : 'border-transparent',
+          'bg-transparent',
+          SELECTION_BORDER,
+          isSelected ? 'after:border-primary' : 'after:border-transparent',
         ],
         className
       )}
