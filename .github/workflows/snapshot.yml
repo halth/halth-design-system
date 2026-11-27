@@ -10,16 +10,13 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   contents: read
-  packages: write
   pull-requests: write
+  id-token: write
 
 jobs:
   snapshot:
     if: contains(github.event.pull_request.labels.*.name, 'snapshot')
     runs-on: ubuntu-latest
-    env:
-      # setup-node's .npmrc reads this for GitHub Packages, from install through publish.
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -27,7 +24,7 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
           scope: '@halth'
       - run: pnpm install --frozen-lockfile
       - name: Check for changesets

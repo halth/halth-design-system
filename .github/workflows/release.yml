@@ -1,7 +1,7 @@
 name: Release
 
 # Run from the Actions tab once the version PR (`pnpm version-packages`) has merged into main.
-# Publishes every package version that isn't on GitHub Packages yet and pushes its git tag.
+# Publishes every package version that isn't on npm yet and pushes its git tag.
 on:
   workflow_dispatch:
 
@@ -9,15 +9,12 @@ concurrency: ${{ github.workflow }}
 
 permissions:
   contents: write
-  packages: write
+  id-token: write
 
 jobs:
   release:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    env:
-      # setup-node's .npmrc reads this for GitHub Packages, from install through publish.
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -25,7 +22,7 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
           scope: '@halth'
       - run: pnpm install --frozen-lockfile
       - name: Check versions are bumped

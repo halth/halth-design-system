@@ -23,7 +23,7 @@ import { BrandPage, CodeBlock, Hero, Section, Topic } from './BrandPage';
   copyLabel="Copy install command"
 />
 
-<Section id="packages" title="Packages" description="Two packages, published to GitHub Packages. Apps import components from @halth/design-system and never build their own versions.">
+<Section id="packages" title="Packages" description="Two packages, published publicly on npm. Apps import components from @halth/design-system and never build their own versions.">
   <div className="grid gap-6 md:grid-cols-2">
     <Topic title="@halth/design-system">
 
@@ -38,8 +38,7 @@ Colours, radius, fonts and the type scale, as Tailwind v4 and HeroUI v3 themes, 
   </div>
 </Section>
 
-<Section id="install" surface="tint" title="Install" description="Point the @halth scope at GitHub Packages, then install both packages.">
-  <CodeBlock code={'# .npmrc\n@halth:registry=https://npm.pkg.github.com'} copyLabel="Copy .npmrc" />
+<Section id="install" surface="tint" title="Install" description="Both packages are public on npm, so there is no registry config and no token.">
   <CodeBlock code="npm install @halth/design-system @halth/design-system-tokens" copyLabel="Copy install command" />
 </Section>
 
