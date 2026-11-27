@@ -1,5 +1,19 @@
 # @halth/design-system
 
+## 0.3.0
+
+### Minor Changes
+
+- c19be53: Publish to npm instead of GitHub Packages. Installing no longer needs an `.npmrc` or a token: `npm install @halth/design-system @halth/design-system-tokens`. Releases publish via npm trusted publishing (OIDC) with provenance attestations.
+- 9681ca9: Add a `display` type style (light, fluid from 48px to 72px, `text-display`) and `Typography variant="display"`, matching the brand display style on halth.com/brand. For hero titles on marketing and docs pages.
+
+### Patch Changes
+
+- 36aae09: `Avatar`: the selected border is drawn over the edge of the photo instead of around it, so no white hairline shows between the border and the photo, especially at the corners. Selectable avatars' photos now fill the whole tile.
+- Updated dependencies [c19be53]
+- Updated dependencies [9681ca9]
+  - @halth/design-system-tokens@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes

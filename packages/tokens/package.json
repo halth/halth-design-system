@@ -1,6 +1,6 @@
 {
   "name": "@halth/design-system-tokens",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "HaltH Design System tokens: colours, radius, fonts, Tailwind v4 theme, HeroUI v3 theme and Tailwind v3/NativeWind presets",
   "license": "UNLICENSED",
   "type": "module",

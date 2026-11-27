@@ -1,5 +1,12 @@
 # @halth/design-system-tokens
 
+## 0.3.0
+
+### Minor Changes
+
+- c19be53: Publish to npm instead of GitHub Packages. Installing no longer needs an `.npmrc` or a token: `npm install @halth/design-system @halth/design-system-tokens`. Releases publish via npm trusted publishing (OIDC) with provenance attestations.
+- 9681ca9: Add a `display` type style (light, fluid from 48px to 72px, `text-display`) and `Typography variant="display"`, matching the brand display style on halth.com/brand. For hero titles on marketing and docs pages.
+
 ## 0.2.1
 
 No changes in this release.
